@@ -14,7 +14,7 @@ public abstract class Player {
     protected Context mContext;
     private int mHowManyInLineToWin = 3;
     private String mPlayerName;
-    private ArrayList<int[][]> listOfClickedFields;
+    private ArrayList<int[]> listOfClickedFields;
 
     public Player(Context context) {
         mContext = context;
@@ -33,7 +33,7 @@ public abstract class Player {
         return mPlayerName;
     }
 
-    public boolean makeMove(int[][] coords) {
+    public boolean makeMove(int[] coords) {
         listOfClickedFields.add(coords);
 
         if (listOfClickedFields.size() >= mHowManyInLineToWin) {
@@ -43,7 +43,7 @@ public abstract class Player {
         }
     }
 
-    private boolean checkIfWon(int[][] coords) {
+    private boolean checkIfWon(int[] coords) {
 
         if(checkVertical(coords))
             return true;
@@ -55,15 +55,15 @@ public abstract class Player {
             return false;
     }
 
-    private boolean checkVertical(int[][] coords) {
+    private boolean checkVertical(int[] coords) {
         return false;
     }
 
-    private boolean checkHorizontal(int[][] coords) {
+    private boolean checkHorizontal(int[] coords) {
         return false;
     }
 
-    private boolean checkDiagonal(int[][] coords) {
+    private boolean checkDiagonal(int[] coords) {
         return false;
     }
 

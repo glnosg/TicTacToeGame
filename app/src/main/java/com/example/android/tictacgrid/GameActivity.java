@@ -3,10 +3,13 @@ package com.example.android.tictacgrid;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.GridView;
+import android.util.Log;
+import android.view.View;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 
 import com.example.android.tictacgrid.Players.Player;
 import com.example.android.tictacgrid.Players.Player1;
@@ -15,21 +18,24 @@ import com.example.android.tictacgrid.Shapes.ShapeEmpty;
 
 import java.util.ArrayList;
 
+
 /**
  * Created by pawel on 20.01.18.
  */
 
-public class GameActivity extends AppCompatActivity
-        implements ShapeEmpty.OnFieldClickListener {
+public class GameActivity extends AppCompatActivity {
 
-    int sizeOfGameGrid = 3;
+    int numOfGridColumns = 3;
+    int getNumOfGridRows = 3;
+
     ArrayList<Player> listOfPlayers;
+    Player currentPlayer;
     ShapeEmpty[] emptyFields;
     private Toast mToast;
 
     LinearLayout gameLayout;
     TextView namePlayer1, namePlayer2;
-    GridView gameGrid;
+    GridLayout gameGrid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +43,7 @@ public class GameActivity extends AppCompatActivity
         setContentView(R.layout.activity_game);
 
         gameLayout = (LinearLayout) findViewById(R.id.ll_game_layout);
-        gameGrid = (GridView) findViewById(R.id.gv_game_grid);
+        gameGrid = (GridLayout) findViewById(R.id.gv_game_grid);
 
         namePlayer1 = (TextView) findViewById(R.id.tv_player1_name);
         namePlayer2 = (TextView) findViewById(R.id.tv_player2_name);
@@ -64,12 +70,78 @@ public class GameActivity extends AppCompatActivity
 //                listOfPlayers.add(new Player4(this, namesOfPlayers.get(1)));
         }
 
-        gameGrid.setNumColumns(sizeOfGameGrid);
+        if (currentPlayer == null)
+            currentPlayer = listOfPlayers.get(0);
+
+        gameGrid.setColumnCount(numOfGridColumns);
+        gameGrid.setRowCount(getNumOfGridRows);
+        emptyFields = new ShapeEmpty[numOfGridColumns*getNumOfGridRows];
+
+        for(int yPos=0; yPos<getNumOfGridRows; yPos++){
+            for(int xPos=0; xPos<numOfGridColumns; xPos++){
+                final int[] coords = {xPos, yPos};
+                final ShapeEmpty tView = new ShapeEmpty(this);
+                emptyFields[yPos*numOfGridColumns + xPos] = tView;
+                gameGrid.addView(tView);
+                setFieldListener(coords);
+            }
+        }
+
+        gameGrid.getViewTreeObserver().addOnGlobalLayoutListener(
+                new OnGlobalLayoutListener(){
+
+                    @Override
+                    public void onGlobalLayout() {
+
+                        final int MARGIN = 5;
+
+                        int pWidth = gameGrid.getWidth();
+                        int pHeight = gameGrid.getHeight();
+                        int numOfCol = gameGrid.getColumnCount();
+                        int numOfRow = gameGrid.getRowCount();
+                        int w = pWidth/numOfCol;
+                        int h = pHeight/numOfRow;
+
+                        for(int yPos=0; yPos<numOfRow; yPos++){
+                            for(int xPos=0; xPos<numOfCol; xPos++){
+                                GridLayout.LayoutParams params =
+                                        (GridLayout.LayoutParams)emptyFields[yPos*numOfCol + xPos].getLayoutParams();
+                                params.width = w - 2*MARGIN;
+                                params.height = h - 2*MARGIN;
+                                params.setMargins(MARGIN, MARGIN, MARGIN, MARGIN);
+                                emptyFields[yPos*numOfCol + xPos].setLayoutParams(params);
+                            }
+                        }
+
+                    }});
     }
 
-    @Override
-    public void onFieldClicked(Player player) {
+    private void setFieldListener(int[] coordis) {
 
+        final int[] coords = coordis;
+        final int clickedFieldIndex = (numOfGridColumns * coords[1]) + coords[0];
+
+        gameGrid.getChildAt(clickedFieldIndex).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gameGrid.addView(currentPlayer.getShape(), clickedFieldIndex);
+                currentPlayer.makeMove(coords);
+                showToast("Clicked: " + coords[0] + ", " + coords[1]);
+                changePlayer();
+            }
+        });
+
+    }
+
+    private void changePlayer() {
+        int currentPlayerIndex = listOfPlayers.indexOf(currentPlayer);
+
+        if (currentPlayerIndex == (listOfPlayers.size() - 1))
+            currentPlayer = listOfPlayers.get(0);
+        else
+            currentPlayer = listOfPlayers.get(currentPlayerIndex + 1);
+
+//        playerName.setText(currentPlayer.getPlayerName());
     }
 
     private void showToast(String text) {
