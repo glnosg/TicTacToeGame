@@ -34,4 +34,5 @@ public abstract class ShapeView extends View {
     }
 
     abstract void drawFigure(Canvas canvas);
+
 }

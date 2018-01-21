@@ -178,7 +178,10 @@ public class GameActivity extends AppCompatActivity {
                 gameGrid.removeView(gameGrid.getChildAt(clickedFieldIndex));
                 gameGrid.addView(newShape, clickedFieldIndex, gameGridLayoutParams);
 
-                currentPlayer.makeMove(coords);
+                if (currentPlayer.makeMove(coords)) {
+//                    currentPlayer.getWinningShape();
+                    showToast(currentPlayer.getPlayerName() + " WON!");
+                }
                 changePlayer();
             }
         });

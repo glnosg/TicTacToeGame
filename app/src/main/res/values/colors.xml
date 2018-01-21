@@ -6,9 +6,16 @@
 
     <!-- Game shapes colors -->
     <color name="colorShapeX">#80CBC4</color>
+    <color name="colorShapeXVictoryBackground">#B2DFDB</color>
+
     <color name="colorShapeO">#EF9A9A</color>
+    <color name="colorShapeOVictoryBackground">#FFCDD2</color>
+
     <color name="colorShapeSquare">#B39DDB</color>
+    <color name="colorShapeSquareVictoryBackground">#D1C4E9</color>
+
     <color name="colorShapeTriangle">#BCAAA4</color>
+    <color name="colorShapeTriangleVictoryBackground">#D7CCC8</color>
 
     <!-- Game grid colors -->
     <color name="colorGameGridFrame">#EEEEEE</color>

@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         listOfPlayers = new ArrayList<>();
         listOfPlayers.add(new Player1(this, "Paweł"));
         listOfPlayers.add(new Player2(this, "Radek"));
-        listOfPlayers.add(new Player3(this, "Ania"));
-        listOfPlayers.add(new Player4(this, "Agnieszka"));
+//        listOfPlayers.add(new Player3(this, "Ania"));
+//        listOfPlayers.add(new Player4(this, "Agnieszka"));
 
         myLayout = (LinearLayout) findViewById(R.id.ll_main_layout);
 
