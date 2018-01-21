@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 
+import com.example.android.tictacgrid.R;
+
 /**
  * Created by pawel on 20.01.18.
  */
@@ -14,12 +16,9 @@ public class ShapeO extends ShapeView {
 
     public ShapeO(Context context) {
         super(context);
-        Log.d("ShapeO", "in ShapeO constructor");
     }
 
     public void drawFigure(Canvas canvas) {
-
-        Log.d("ShapeO", "in drawFigure");
 
         float cx = getMeasuredHeight();
         float cy = getMeasuredWidth();
@@ -27,11 +26,11 @@ public class ShapeO extends ShapeView {
         float r = getMeasuredHeight()/3;
 
         Paint shapePaint = new Paint();
-        shapePaint.setColor(Color.parseColor("#EF9A9A"));
+        shapePaint.setColor(getResources().getColor(R.color.colorShapeO));
         shapePaint.setStrokeWidth(10);
 
         Paint rectPaint = new Paint();
-        rectPaint.setColor(Color.parseColor("#FAFAFA"));
+        rectPaint.setColor(getResources().getColor(R.color.colorGameGridCellBackground));
 
         canvas.drawRect(0, 0, cx, cy, rectPaint);
         canvas.drawCircle(cx/2, cy/2, r, shapePaint);

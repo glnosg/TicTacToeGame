@@ -1,10 +1,8 @@
 package com.example.android.tictacgrid;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -15,13 +13,12 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import com.example.android.tictacgrid.Players.Player;
 import com.example.android.tictacgrid.Players.Player1;
 import com.example.android.tictacgrid.Players.Player2;
+import com.example.android.tictacgrid.Players.Player3;
+import com.example.android.tictacgrid.Players.Player4;
 import com.example.android.tictacgrid.Shapes.ShapeEmpty;
 import com.example.android.tictacgrid.Shapes.ShapeView;
 
 import java.util.ArrayList;
-
-import static android.R.attr.x;
-
 
 /**
  * Created by pawel on 20.01.18.
@@ -35,7 +32,7 @@ public class GameActivity extends AppCompatActivity {
     ArrayList<Player> listOfPlayers;
     Player currentPlayer;
     ShapeView[] currentViewsInGameGrid;
-    private Toast mToast;
+    Toast mToast;
 
     LinearLayout gameLayout;
     ArrayList<TextView> listOfPlayersTextViews;
@@ -46,24 +43,28 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        gameLayout = (LinearLayout) findViewById(R.id.ll_game_layout);
-        gameGrid = (GridLayout) findViewById(R.id.gv_game_grid);
-
         buildGrid();
         setUpGame();
     }
 
     private void buildGrid() {
+
+        gameLayout = (LinearLayout) findViewById(R.id.ll_game_layout);
+
+        gameGrid = (GridLayout) findViewById(R.id.gv_game_grid);
         gameGrid.setColumnCount(numOfGridColumns);
         gameGrid.setRowCount(numOfGridRows);
-        currentViewsInGameGrid = new ShapeView[numOfGridColumns* numOfGridRows];
 
-        for(int yPos = 0; yPos< numOfGridRows; yPos++){
-            for(int xPos=0; xPos<numOfGridColumns; xPos++){
-                final int[] coords = {xPos, yPos};
-                ShapeView tView = new ShapeEmpty(this);
-                currentViewsInGameGrid[yPos*numOfGridColumns + xPos] = tView;
-                gameGrid.addView(tView);
+        currentViewsInGameGrid = new ShapeView[numOfGridColumns * numOfGridRows];
+
+        for(int coordY = 0; coordY < numOfGridRows; coordY++) {
+            for(int coordX = 0; coordX < numOfGridColumns; coordX++) {
+
+                final int[] coords = {coordX, coordY};
+
+                ShapeView currentView = new ShapeEmpty(this);
+                currentViewsInGameGrid[(coordY * numOfGridColumns) + coordX] = currentView;
+                gameGrid.addView(currentView);
                 setFieldListener(coords);
             }
         }
@@ -74,21 +75,27 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void onGlobalLayout() {
 
-                        final int MARGIN = 3;
 
-                        int pWidth = gameGrid.getWidth();
-                        int pHeight = gameGrid.getHeight();
-                        int w = pWidth/numOfGridColumns;
-                        int h = pHeight/numOfGridRows;
+                        final int FRAME_WIDTH = 3;
 
-                        for(int yPos=0; yPos<numOfGridRows; yPos++){
-                            for(int xPos=0; xPos<numOfGridColumns; xPos++){
+                        int gameGridWidth = gameGrid.getWidth();
+                        int gameGridHeight = gameGrid.getHeight();
+                        int gameGridCellWidth = gameGridWidth / numOfGridColumns;
+                        int gameGridCellHeight = gameGridHeight / numOfGridRows;
+
+                        for(int coordY = 0; coordY < numOfGridRows; coordY++){
+                            for(int coordX = 0; coordX < numOfGridColumns; coordX++) {
+
                                 GridLayout.LayoutParams params =
-                                        (GridLayout.LayoutParams) currentViewsInGameGrid[yPos*numOfGridColumns + xPos].getLayoutParams();
-                                params.width = w - 2*MARGIN;
-                                params.height = h - 2*MARGIN;
-                                params.setMargins(MARGIN, MARGIN, MARGIN, MARGIN);
-                                currentViewsInGameGrid[yPos*numOfGridColumns + xPos].setLayoutParams(params);
+                                        (GridLayout.LayoutParams) currentViewsInGameGrid[
+                                                (coordY * numOfGridColumns) + coordX].getLayoutParams();
+
+                                params.width = gameGridCellWidth - (2 * FRAME_WIDTH);
+                                params.height = gameGridCellHeight - (2 * FRAME_WIDTH);
+                                params.setMargins(FRAME_WIDTH, FRAME_WIDTH, FRAME_WIDTH, FRAME_WIDTH);
+
+                                currentViewsInGameGrid[
+                                        (coordY * numOfGridColumns) + coordX].setLayoutParams(params);
                             }
                         }
 
@@ -103,26 +110,54 @@ public class GameActivity extends AppCompatActivity {
                 (ArrayList<String>) getIntent().getSerializableExtra("namesOfPlayers");
 
         switch (namesOfPlayers.size()) {
+
             case 2:
-                listOfPlayers.add(new Player1(this, namesOfPlayers.get(0)));
-                listOfPlayers.add(new Player2(this, namesOfPlayers.get(1)));
-
-                listOfPlayersTextViews.add((TextView) findViewById(R.id.tv_player1_name));
-                listOfPlayersTextViews.get(0).setText(listOfPlayers.get(0).getPlayerName());
-
-                listOfPlayersTextViews.add((TextView) findViewById(R.id.tv_player2_name));
-                listOfPlayersTextViews.get(1).setText(listOfPlayers.get(1).getPlayerName());
-//            case 3:
-//                listOfPlayers.add(new Player3(this, namesOfPlayers.get(1)));
-//            case 4:
-//                listOfPlayers.add(new Player4(this, namesOfPlayers.get(1)));
+                addTwoPlayers(namesOfPlayers);
+                break;
+            case 3:
+                addThreePlayers(namesOfPlayers);
+                break;
+            case 4:
+                addFourPlayers(namesOfPlayers);
         }
 
         if (currentPlayer == null) {
             currentPlayer = listOfPlayers.get(0);
-            listOfPlayersTextViews.get(0).setBackgroundColor(Color.parseColor("#F06292"));
+            listOfPlayersTextViews.get(0).
+                    setBackgroundColor(getResources().getColor(R.color.colorActivePlayerBackground));
         }
+    }
 
+    private void addTwoPlayers(ArrayList<String> names) {
+
+        listOfPlayers.add(new Player1(this, names.get(0)));
+        listOfPlayers.add(new Player2(this, names.get(1)));
+
+        listOfPlayersTextViews.add((TextView) findViewById(R.id.tv_player1_name));
+        listOfPlayersTextViews.get(0).setText(listOfPlayers.get(0).getPlayerName());
+
+        listOfPlayersTextViews.add((TextView) findViewById(R.id.tv_player2_name));
+        listOfPlayersTextViews.get(1).setText(listOfPlayers.get(1).getPlayerName());
+    }
+
+    private void addThreePlayers(ArrayList<String> names) {
+
+        addTwoPlayers(names);
+        findViewById(R.id.ll_extra_players).setVisibility(View.VISIBLE);
+
+        listOfPlayers.add(new Player3(this, names.get(2)));
+        listOfPlayersTextViews.add((TextView) findViewById(R.id.tv_player3_name));
+        listOfPlayersTextViews.get(2).setText(listOfPlayers.get(2).getPlayerName());
+    }
+
+    private void addFourPlayers(ArrayList<String> names) {
+
+        addThreePlayers(names);
+
+        listOfPlayers.add(new Player4(this, names.get(3)));
+        listOfPlayersTextViews.add((TextView) findViewById(R.id.tv_player4_name));
+        listOfPlayersTextViews.get(3).setVisibility(View.VISIBLE);
+        listOfPlayersTextViews.get(3).setText(listOfPlayers.get(3).getPlayerName());
     }
 
     private void setFieldListener(final int[] coordis) {
@@ -133,45 +168,57 @@ public class GameActivity extends AppCompatActivity {
         gameGrid.getChildAt(clickedFieldIndex).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final int MARGIN = 3;
 
-                gameGridLayoutParams =
-                        (GridLayout.LayoutParams) currentViewsInGameGrid[coords[1]*numOfGridColumns + coords[0]].getLayoutParams();
-                int pWidth = gameGrid.getWidth();
-                int pHeight = gameGrid.getHeight();
-                int w = pWidth/numOfGridColumns;
-                int h = pHeight/numOfGridRows;
-
-                gameGridLayoutParams.width = w - 2*MARGIN;
-                gameGridLayoutParams.height = h - 2*MARGIN;
-                gameGridLayoutParams.setMargins(MARGIN, MARGIN, MARGIN, MARGIN);
-
-
+                setLayoutParamsForNewShape(coords);
                 ShapeView newShape = currentPlayer.getShape();
                 newShape.setLayoutParams(gameGridLayoutParams);
+
                 currentViewsInGameGrid[clickedFieldIndex] = newShape;
+
                 gameGrid.removeView(gameGrid.getChildAt(clickedFieldIndex));
                 gameGrid.addView(newShape, clickedFieldIndex, gameGridLayoutParams);
+
                 currentPlayer.makeMove(coords);
-                showToast("Clicked: " + coords[0] + ", " + coords[1] + "; index: " + clickedFieldIndex);
                 changePlayer();
             }
         });
 
     }
 
+    private void setLayoutParamsForNewShape(int[] coords) {
+
+        final int FRAME_WIDTH = 3;
+
+        gameGridLayoutParams =
+                (GridLayout.LayoutParams) currentViewsInGameGrid[
+                        (coords[1] * numOfGridColumns) + coords[0]].getLayoutParams();
+
+        int gameGridWidth = gameGrid.getWidth();
+        int gameGridHeight = gameGrid.getHeight();
+        int gameGridCellWidth = gameGridWidth / numOfGridColumns;
+        int gameGridCellHeight = gameGridHeight / numOfGridRows;
+
+        gameGridLayoutParams.width = gameGridCellWidth - (2 * FRAME_WIDTH);
+        gameGridLayoutParams.height = gameGridCellHeight - (2 * FRAME_WIDTH);
+        gameGridLayoutParams.setMargins(FRAME_WIDTH, FRAME_WIDTH, FRAME_WIDTH, FRAME_WIDTH);
+    }
+
     private void changePlayer() {
+
         int currentPlayerIndex = listOfPlayers.indexOf(currentPlayer);
-        listOfPlayersTextViews.get(currentPlayerIndex).setBackgroundColor(Color.parseColor("#FAFAFA"));
+
+        listOfPlayersTextViews.get(currentPlayerIndex)
+                .setBackgroundColor(getResources().getColor(R.color.colorGameGridCellBackground));
 
         if (currentPlayerIndex == (listOfPlayers.size() - 1)) {
             currentPlayer = listOfPlayers.get(0);
-            listOfPlayersTextViews.get(0).setBackgroundColor(Color.parseColor("#F06292"));
+            listOfPlayersTextViews.get(0)
+                    .setBackgroundColor(getResources().getColor(R.color.colorActivePlayerBackground));
         } else {
             currentPlayer = listOfPlayers.get(currentPlayerIndex + 1);
-            listOfPlayersTextViews.get(currentPlayerIndex + 1).setBackgroundColor(Color.parseColor("#F06292"));
+            listOfPlayersTextViews.get(currentPlayerIndex + 1)
+                    .setBackgroundColor(getResources().getColor(R.color.colorActivePlayerBackground));
         }
-//        playerName.setText(currentPlayer.getPlayerName());
     }
 
     private void showToast(String text) {

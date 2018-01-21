@@ -15,8 +15,6 @@ public abstract class ShapeView extends View {
 
     public ShapeView(Context context) {
         super(context);
-//        this.setWillNotDraw(false);
-//        invalidate();
     }
 
     public ShapeView(Context context, AttributeSet attrs) {

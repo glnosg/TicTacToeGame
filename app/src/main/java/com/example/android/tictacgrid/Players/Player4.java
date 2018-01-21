@@ -9,13 +9,13 @@ import com.example.android.tictacgrid.Shapes.ShapeView;
  * Created by pawel on 20.01.18.
  */
 
-public class Player2 extends Player {
+public class Player4 extends Player {
 
-    public Player2(Context context) {
+    public Player4(Context context) {
         super(context);
     }
 
-    public Player2(Context context, String name) {
+    public Player4(Context context, String name) {
         super(context, name);
     }
 

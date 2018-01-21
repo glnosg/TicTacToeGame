@@ -3,4 +3,17 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- Game shapes colors -->
+    <color name="colorShapeX">#80CBC4</color>
+    <color name="colorShapeO">#EF9A9A</color>
+    <color name="colorShapeSquare">#E6EE9C</color>
+    <color name="colorShapeTriangle">#BCAAA4</color>
+
+    <!-- Game grid colors -->
+    <color name="colorGameGridFrame">#EEEEEE</color>
+    <color name="colorGameGridCellBackground">#FAFAFA</color>
+
+    <!-- Players display colors -->
+    <color name="colorActivePlayerBackground">#9FA8DA</color>
 </resources>

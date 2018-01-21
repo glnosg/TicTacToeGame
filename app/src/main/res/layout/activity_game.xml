@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:baselineAligned="false">
+    android:baselineAligned="false"
+    android:background="@color/colorGameGridCellBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,40 +18,46 @@
             android:id="@+id/tv_player1_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Player1"/>
+            tools:text="Player1" />
 
         <TextView
-            android:id="@+id/tv_score"
+            android:id="@+id/tv_score_top"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/tv_player2_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Player2"/>
-
+            tools:text="Player2" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_extra_players"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_player3_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Player3"/>
+            tools:text="Player1" />
+
+        <TextView
+            android:id="@+id/tv_score_bottom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/tv_player4_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            tools:text="Player4" />
+            android:visibility="invisible"
+            tools:text="Player2" />
 
     </LinearLayout>
 
@@ -59,6 +66,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="#EEEEEE" />
+        android:background="@color/colorGameGridFrame" />
 
 </LinearLayout>
