@@ -26,8 +26,8 @@ import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
 
-    int numOfGridColumns = 20;
-    int numOfGridRows = 15;
+    int numOfGridColumns = 3;
+    int numOfGridRows = 3;
 
     ArrayList<Player> listOfPlayers;
     Player currentPlayer;

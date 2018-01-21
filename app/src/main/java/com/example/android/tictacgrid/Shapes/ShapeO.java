@@ -23,17 +23,18 @@ public class ShapeO extends ShapeView {
         float cx = getMeasuredHeight();
         float cy = getMeasuredWidth();
 
-        float r = getMeasuredHeight()/3;
-
-        Paint shapePaint = new Paint();
-        shapePaint.setColor(getResources().getColor(R.color.colorShapeO));
-        shapePaint.setStrokeWidth(10);
+        float r = (float) (getMeasuredHeight() / 2.7);
 
         Paint rectPaint = new Paint();
         rectPaint.setColor(getResources().getColor(R.color.colorGameGridCellBackground));
 
         canvas.drawRect(0, 0, cx, cy, rectPaint);
+
+        Paint shapePaint = new Paint();
+        shapePaint.setColor(getResources().getColor(R.color.colorShapeO));
+        shapePaint.setStrokeWidth(10);
+
         canvas.drawCircle(cx/2, cy/2, r, shapePaint);
-        canvas.drawCircle(cx/2, cy/2, (float) (r * 0.85), rectPaint);
+        canvas.drawCircle(cx/2, cy/2, (float) (r * 0.88), rectPaint);
     }
 }

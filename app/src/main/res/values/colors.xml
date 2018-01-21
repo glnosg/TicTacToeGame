@@ -7,7 +7,7 @@
     <!-- Game shapes colors -->
     <color name="colorShapeX">#80CBC4</color>
     <color name="colorShapeO">#EF9A9A</color>
-    <color name="colorShapeSquare">#E6EE9C</color>
+    <color name="colorShapeSquare">#B39DDB</color>
     <color name="colorShapeTriangle">#BCAAA4</color>
 
     <!-- Game grid colors -->

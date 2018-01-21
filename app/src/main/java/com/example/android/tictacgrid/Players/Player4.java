@@ -2,7 +2,7 @@ package com.example.android.tictacgrid.Players;
 
 import android.content.Context;
 
-import com.example.android.tictacgrid.Shapes.ShapeO;
+import com.example.android.tictacgrid.Shapes.ShapeTriangle;
 import com.example.android.tictacgrid.Shapes.ShapeView;
 
 /**
@@ -21,6 +21,6 @@ public class Player4 extends Player {
 
     @Override
     public ShapeView getShape() {
-        return new ShapeO(mContext);
+        return new ShapeTriangle(mContext);
     }
 }
