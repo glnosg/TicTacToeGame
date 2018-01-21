@@ -1,6 +1,8 @@
 package com.example.android.tictacgrid.Players;
 
 import android.content.Context;
+import android.util.Log;
+
 import com.example.android.tictacgrid.Shapes.ShapeView;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public abstract class Player {
 
     public boolean makeMove(int[] coords) {
         listOfClickedFields.add(coords);
+        Log.d(this.getPlayerName(), " made move");
 
         if (listOfClickedFields.size() >= mHowManyInLineToWin) {
             return checkIfWon(coords);
