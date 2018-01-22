@@ -13,8 +13,15 @@ import android.graphics.Canvas;
 
 public abstract class ShapeView extends View {
 
+    protected boolean mHasWon = false;
+
     public ShapeView(Context context) {
         super(context);
+    }
+
+    public ShapeView(Context context, boolean hasWon) {
+        super(context);
+        this.mHasWon = hasWon;
     }
 
     public ShapeView(Context context, AttributeSet attrs) {

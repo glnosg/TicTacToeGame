@@ -16,6 +16,10 @@ public class ShapeSquare extends ShapeView {
         super(context);
     }
 
+    public ShapeSquare(Context context, boolean hasWon) {
+        super(context, hasWon);
+    }
+
     public void drawFigure(Canvas canvas) {
 
         float centerX = getMeasuredWidth() / 2;
@@ -37,7 +41,11 @@ public class ShapeSquare extends ShapeView {
         };
 
         Paint rectPaint = new Paint();
-        rectPaint.setColor(getResources().getColor(R.color.colorGameGridCellBackground));
+
+        if (mHasWon)
+            rectPaint.setColor(getResources().getColor(R.color.colorShapeSquareVictoryBackground));
+        else
+            rectPaint.setColor(getResources().getColor(R.color.colorGameGridCellBackground));
 
         canvas.drawRect(0, 0, getMeasuredHeight(), getMeasuredWidth(), rectPaint);
 

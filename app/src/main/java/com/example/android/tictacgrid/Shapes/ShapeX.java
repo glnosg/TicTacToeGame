@@ -17,6 +17,10 @@ public class ShapeX extends ShapeView {
         super(context);
     }
 
+    public ShapeX(Context context, boolean hasWon) {
+        super(context, hasWon);
+    }
+
     public void drawFigure(Canvas canvas) {
 
         float ax = (float) (getMeasuredHeight() * (0.17));
@@ -26,7 +30,11 @@ public class ShapeX extends ShapeView {
         float by = (float) (getMeasuredWidth() * (0.83));
 
         Paint rectPaint = new Paint();
-        rectPaint.setColor(getResources().getColor(R.color.colorGameGridCellBackground));
+
+        if (mHasWon)
+            rectPaint.setColor(getResources().getColor(R.color.colorShapeXVictoryBackground));
+        else
+            rectPaint.setColor(getResources().getColor(R.color.colorGameGridCellBackground));
 
         canvas.drawRect(0, 0, getMeasuredHeight(), getMeasuredWidth(), rectPaint);
 

@@ -18,6 +18,10 @@ public class ShapeO extends ShapeView {
         super(context);
     }
 
+    public ShapeO(Context context, boolean hasWon) {
+        super(context, hasWon);
+    }
+
     public void drawFigure(Canvas canvas) {
 
         float cx = getMeasuredHeight();
@@ -26,7 +30,11 @@ public class ShapeO extends ShapeView {
         float r = (float) (getMeasuredHeight() / 2.7);
 
         Paint rectPaint = new Paint();
-        rectPaint.setColor(getResources().getColor(R.color.colorGameGridCellBackground));
+
+        if (mHasWon)
+            rectPaint.setColor(getResources().getColor(R.color.colorShapeOVictoryBackground));
+        else
+            rectPaint.setColor(getResources().getColor(R.color.colorGameGridCellBackground));
 
         canvas.drawRect(0, 0, cx, cy, rectPaint);
 

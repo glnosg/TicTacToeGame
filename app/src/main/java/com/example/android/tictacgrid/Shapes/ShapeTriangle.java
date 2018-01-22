@@ -18,6 +18,10 @@ public class ShapeTriangle extends ShapeView {
         super(context);
     }
 
+    public ShapeTriangle(Context context, boolean hasWon) {
+        super(context, hasWon);
+    }
+
     public void drawFigure(Canvas canvas) {
 
         float ax = (float) (getMeasuredHeight() * (0.15));
@@ -29,7 +33,11 @@ public class ShapeTriangle extends ShapeView {
         float centerX = getMeasuredWidth() / 2;
 
         Paint rectPaint = new Paint();
-        rectPaint.setColor(getResources().getColor(R.color.colorGameGridCellBackground));
+
+        if (mHasWon)
+            rectPaint.setColor(getResources().getColor(R.color.colorShapeTriangleVictoryBackground));
+        else
+            rectPaint.setColor(getResources().getColor(R.color.colorGameGridCellBackground));
 
         canvas.drawRect(0, 0, getMeasuredHeight(), getMeasuredWidth(), rectPaint);
 

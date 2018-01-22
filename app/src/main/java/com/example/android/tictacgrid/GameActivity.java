@@ -26,8 +26,9 @@ import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
 
-    int numOfGridColumns = 3;
-    int numOfGridRows = 3;
+    int numOfGridColumns = 15;
+    int numOfGridRows = 20;
+    boolean isGameFinished = false;
 
     ArrayList<Player> listOfPlayers;
     Player currentPlayer;
@@ -160,41 +161,45 @@ public class GameActivity extends AppCompatActivity {
         listOfPlayersTextViews.get(3).setText(listOfPlayers.get(3).getPlayerName());
     }
 
-    private void setFieldListener(final int[] coordis) {
+    private void setFieldListener(final int[] coords) {
 
-        final int[] coords = coordis;
-        final int clickedFieldIndex = (numOfGridColumns * coords[1]) + coords[0];
-
-        gameGrid.getChildAt(clickedFieldIndex).setOnClickListener(new View.OnClickListener() {
+        gameGrid.getChildAt((numOfGridColumns * coords[1]) + coords[0]).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                setLayoutParamsForNewShape(coords);
-                ShapeView newShape = currentPlayer.getShape();
-                newShape.setLayoutParams(gameGridLayoutParams);
-
-                currentViewsInGameGrid[clickedFieldIndex] = newShape;
-
-                gameGrid.removeView(gameGrid.getChildAt(clickedFieldIndex));
-                gameGrid.addView(newShape, clickedFieldIndex, gameGridLayoutParams);
-
-                if (currentPlayer.makeMove(coords)) {
-//                    currentPlayer.getWinningShape();
-                    showToast(currentPlayer.getPlayerName() + " WON!");
+                if (!isGameFinished) {
+                    addNewShape(coords);
+                    if (currentPlayer.makeMove(coords)) {
+                        finishGame();
+                    } else {
+                        changePlayer();
+                    }
                 }
-                changePlayer();
             }
         });
 
     }
 
-    private void setLayoutParamsForNewShape(int[] coords) {
+    private void addNewShape(int[] coords) {
+
+        int clickedFieldIndex = (numOfGridColumns * coords[1]) + coords[0];
+        setLayoutParamsForNewShape(clickedFieldIndex);
+
+        ShapeView newShape = currentPlayer.getShape(isGameFinished);
+        newShape.setLayoutParams(gameGridLayoutParams);
+
+        currentViewsInGameGrid[clickedFieldIndex] = newShape;
+
+        gameGrid.removeView(gameGrid.getChildAt(clickedFieldIndex));
+        gameGrid.addView(newShape, clickedFieldIndex, gameGridLayoutParams);
+    }
+
+    private void setLayoutParamsForNewShape(int fieldIndex) {
 
         final int FRAME_WIDTH = 3;
 
         gameGridLayoutParams =
-                (GridLayout.LayoutParams) currentViewsInGameGrid[
-                        (coords[1] * numOfGridColumns) + coords[0]].getLayoutParams();
+                (GridLayout.LayoutParams) currentViewsInGameGrid[fieldIndex].getLayoutParams();
 
         int gameGridWidth = gameGrid.getWidth();
         int gameGridHeight = gameGrid.getHeight();
@@ -221,6 +226,20 @@ public class GameActivity extends AppCompatActivity {
             currentPlayer = listOfPlayers.get(currentPlayerIndex + 1);
             listOfPlayersTextViews.get(currentPlayerIndex + 1)
                     .setBackgroundColor(getResources().getColor(R.color.colorActivePlayerBackground));
+        }
+    }
+
+    private void finishGame() {
+        isGameFinished = true;
+        showToast(currentPlayer.getPlayerName() + " WON!");
+        markWinningShapes();
+    }
+
+    private void markWinningShapes() {
+        ArrayList<int[]> listOfWinningFields = currentPlayer.getListOfWinningFields();
+
+        for (int[] currentCoords : listOfWinningFields) {
+            addNewShape(currentCoords);
         }
     }
 

@@ -20,7 +20,7 @@ public class Player2 extends Player {
     }
 
     @Override
-    public ShapeView getShape() {
-        return new ShapeO(mContext);
+    public ShapeView getShape(boolean hasWon) {
+        return new ShapeO(mContext, hasWon);
     }
 }
