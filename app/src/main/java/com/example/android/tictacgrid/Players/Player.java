@@ -16,21 +16,21 @@ import java.util.Collections;
 public abstract class Player {
 
     protected Context mContext;
-    private int mHowManyInLineToWin = 3;
+    private int mHowManyInLineToWin = 5;
     private String mPlayerName;
     private ArrayList<int[]> mListOfClickedFields;
     private ArrayList<int[]> mListOfWinningFields;
 
     public Player(Context context) {
-        mContext = context;
-        mListOfClickedFields = new ArrayList<>();
+        this.mContext = context;
+        this.mListOfClickedFields = new ArrayList<>();
     }
 
     public Player(Context context, String name) {
-        mContext = context;
-        mPlayerName = name;
-        mListOfClickedFields = new ArrayList<>();
-        mListOfWinningFields = new ArrayList<>();
+        this.mContext = context;
+        this.mPlayerName = name;
+        this.mListOfClickedFields = new ArrayList<>();
+        this.mListOfWinningFields = new ArrayList<>();
     }
 
     public abstract ShapeView getShape(boolean hasWon);
@@ -104,26 +104,35 @@ public abstract class Player {
 
         ArrayList<IntentFilter> xValuesAlreadyChecked = new ArrayList<>();
 
-        for (int currentValueY : xValuesForWhichCheckYs) {
+        for (int currentValueX : xValuesForWhichCheckYs) {
 
             ArrayList<Integer> yValuesToCheck = new ArrayList<>();
 
             for (int[] currentCoords : mListOfClickedFields) {
-                if (currentCoords[0] == currentValueY && !xValuesAlreadyChecked.contains(currentValueY)) {
+                if (currentCoords[0] == currentValueX && !xValuesAlreadyChecked.contains(currentValueX)) {
                     yValuesToCheck.add(currentCoords[1]);
                 }
             }
 
             Collections.sort(yValuesToCheck);
+            mListOfWinningFields = new ArrayList<>();
             int howManyConsecutiweYs = 0;
             for (int i = 1; i < yValuesToCheck.size(); ++i) {
                 if (yValuesToCheck.get(i) == (yValuesToCheck.get(i - 1) + 1)) {
+
+                    int[] potentiallyWinningPoint = {currentValueX, yValuesToCheck.get(i - 1)};
+                    mListOfWinningFields.add(potentiallyWinningPoint);
+
                     howManyConsecutiweYs++;
                     if (howManyConsecutiweYs == (mHowManyInLineToWin - 1)) {
+
+                        int[] lastWinningPoint = {currentValueX, yValuesToCheck.get(i)};
+                        mListOfWinningFields.add(lastWinningPoint);
                         return true;
                     }
                 } else {
                     howManyConsecutiweYs = 0;
+                    mListOfWinningFields = new ArrayList<>();
                 }
             }
         }
@@ -173,15 +182,24 @@ public abstract class Player {
             }
 
             Collections.sort(xValuesToCheck);
+            mListOfWinningFields = new ArrayList<>();
             int howManyConsecutiweXs = 0;
             for (int i = 1; i < xValuesToCheck.size(); ++i) {
                 if (xValuesToCheck.get(i) == (xValuesToCheck.get(i - 1) + 1)) {
+
+                    int[] potentiallyWinningPoint = {xValuesToCheck.get(i - 1), currentValueY};
+                    mListOfWinningFields.add(potentiallyWinningPoint);
+
                     howManyConsecutiweXs++;
                     if (howManyConsecutiweXs == (mHowManyInLineToWin - 1)) {
+
+                        int[] lastWinningPoint = {xValuesToCheck.get(i), currentValueY};
+                        mListOfWinningFields.add(lastWinningPoint);
                         return true;
                     }
                 } else {
                     howManyConsecutiweXs = 0;
+                    mListOfWinningFields = new ArrayList<>();
                 }
             }
         }
