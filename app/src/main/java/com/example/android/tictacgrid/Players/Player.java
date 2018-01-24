@@ -209,18 +209,20 @@ public abstract class Player {
     private boolean checkDiagonal() {
         Log.e(getPlayerName(), "In checkDiagonal");
 
-        ArrayList<Integer> listOfAlllXs = new ArrayList<>();
+        ArrayList<Integer> listOfAllXs = new ArrayList<>();
         for (int[] currentCoords : mListOfClickedFields) {
-            listOfAlllXs.add(currentCoords[0]);
+            listOfAllXs.add(currentCoords[0]);
         }
 
-        Collections.sort(listOfAlllXs);
+        Collections.sort(listOfAllXs);
 
         ArrayList<Integer> listOfIndividualXs = new ArrayList<>();
-        listOfIndividualXs.add(listOfAlllXs.get(0));
-        for (int i = 1; i < listOfAlllXs.size(); ++i) {
-            if (listOfAlllXs.get(i) != listOfAlllXs.get(i-1)) {
-                listOfIndividualXs.add(listOfAlllXs.get(i));
+        listOfIndividualXs.add(listOfAllXs.get(0));
+        Log.e(getPlayerName(), "listOfIndividualXs, added: " + listOfAllXs.get(0));
+        for (int i = 1; i < listOfAllXs.size(); ++i) {
+            if (listOfAllXs.get(i) != listOfAllXs.get(i-1)) {
+                listOfIndividualXs.add(listOfAllXs.get(i));
+                Log.e(getPlayerName(), "listOfIndividualXs, added: " + listOfAllXs.get(i));
             }
         }
 
@@ -232,12 +234,19 @@ public abstract class Player {
             if (listOfIndividualXs.get(i) == (listOfIndividualXs.get(i - 1) + 1)) {
                 listOfConsecutiveXs.add(listOfIndividualXs.get(i));
                 if (listOfConsecutiveXs.size() >= mHowManyInLineToWin) {
-                    for (int currentX : listOfConsecutiveXs) {
-                        xValuesForWhichCheckYs.add(currentX);
+                    if (xValuesForWhichCheckYs.contains(listOfIndividualXs.get(i - 1))) {
+                        xValuesForWhichCheckYs.add(listOfIndividualXs.get(i));
+                        Log.e(getPlayerName(), "xValuesforWhichCheckYs, added: " + listOfConsecutiveXs.get(i));
+                    } else {
+                        for (int currentX : listOfConsecutiveXs) {
+                            xValuesForWhichCheckYs.add(currentX);
+                            Log.e(getPlayerName(), "xValuesforWhichCheckYs, added: " + currentX);
+                        }
                     }
                 }
             } else {
                 listOfConsecutiveXs = new ArrayList<>();
+                Log.e(getPlayerName(), "xValuesforWhichCheckYs reset");
                 if (listOfIndividualXs.size() > i + 1) {
                     listOfConsecutiveXs.add(listOfIndividualXs.get(++i));
                 }
@@ -257,6 +266,11 @@ public abstract class Player {
                     if (currentCoords[0] == xValuesForWhichCheckYs.get(i) ) {
                         for (int currentlyCheckedY : listOfAllYsForLastX) {
                             if (currentCoords[1] == (currentlyCheckedY + 1)) {
+                                if (conditionCounter == 0) {
+                                    int[] firstWinningPoint = {currentCoords[0] - 1, currentlyCheckedY};
+                                    mListOfWinningFields.add(firstWinningPoint);
+                                    Log.e(getPlayerName(), "Added new potentially winning field: " + firstWinningPoint[0] + ", " + firstWinningPoint[1]);
+                                }
                                 int[] potentiallyWinningField = {currentCoords[0], currentCoords[1]};
                                 Log.e(getPlayerName(), "Added new potentially winning field: " + currentCoords[0] + ", " + currentCoords[1]);
                                 mListOfWinningFields.add(potentiallyWinningField);
@@ -268,13 +282,58 @@ public abstract class Player {
                                 }
                             } else {
                                 mListOfWinningFields = new ArrayList<>();
+                                Log.e(getPlayerName(), "winning fields reset: " + conditionCounter);
+                                conditionCounter = 0;
+                                Log.e(getPlayerName(), "(inner) Condition counter reseted to value: " + conditionCounter);
                             }
                         }
                     }
                 }
             } else {
                 conditionCounter = 0;
-                Log.e(getPlayerName(), "Condition counter reseted to value: " + conditionCounter);
+                Log.e(getPlayerName(), "(outer) Condition counter reseted to value: " + conditionCounter);
+            }
+        }
+
+        int reverseConditionCounter = 0;
+        for (int i = 1; i < xValuesForWhichCheckYs.size(); ++i) {
+            ArrayList<Integer> listOfAllYsForLastX = new ArrayList<>();
+            for (int[] currentCoords : mListOfClickedFields) {
+                if (currentCoords[0] == xValuesForWhichCheckYs.get(i - 1)) {
+                    listOfAllYsForLastX.add(currentCoords[1]);
+                }
+            }
+            if (xValuesForWhichCheckYs.get(i) == xValuesForWhichCheckYs.get(i - 1) + 1) {
+                for (int[] currentCoords : mListOfClickedFields) {
+                    if (currentCoords[0] == xValuesForWhichCheckYs.get(i) ) {
+                        for (int currentlyCheckedY : listOfAllYsForLastX) {
+                            if (currentCoords[1] == (currentlyCheckedY - 1)) {
+                                if (reverseConditionCounter == 0) {
+                                    int[] firstWinningPoint = {currentCoords[0] - 1, currentlyCheckedY};
+                                    mListOfWinningFields.add(firstWinningPoint);
+                                    Log.e(getPlayerName(), "REVERSE | Added new potentially winning field: " + firstWinningPoint[0] + ", " + firstWinningPoint[1]);
+                                }
+                                int[] potentiallyWinningField = {currentCoords[0], currentCoords[1]};
+                                Log.e(getPlayerName(), "REVERSE | Added new potentially winning field: " + currentCoords[0] + ", " + currentCoords[1]);
+                                mListOfWinningFields.add(potentiallyWinningField);
+                                reverseConditionCounter++;
+                                Log.e(getPlayerName(), "REVERSE | Condition counter incremented to value: " + conditionCounter);
+
+                                if (reverseConditionCounter == (mHowManyInLineToWin - 1)) {
+                                    return true;
+                                }
+                            } else {
+                                mListOfWinningFields = new ArrayList<>();
+                                Log.e(getPlayerName(), "REVERSE | winning fields reset: " + reverseConditionCounter);
+                                reverseConditionCounter = 0;
+                                Log.e(getPlayerName(), "REVERSE | (inner) Condition counter reseted to value: " + reverseConditionCounter);
+                            }
+                        }
+                    }
+                }
+            } else {
+                reverseConditionCounter = 0;
+                Log.e(getPlayerName(), "REVERSE | (outer) Condition counter reseted to value: " + reverseConditionCounter);
             }
         }
 

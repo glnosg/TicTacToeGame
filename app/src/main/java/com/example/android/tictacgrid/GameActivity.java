@@ -3,6 +3,7 @@ package com.example.android.tictacgrid;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -240,6 +241,7 @@ public class GameActivity extends AppCompatActivity {
 
         for (int[] currentCoords : listOfWinningFields) {
             addNewShape(currentCoords);
+            Log.d("GameActivity", "Painted winning field: " + currentCoords[0] + ", " + currentCoords[1]);
         }
     }
 
