@@ -16,22 +16,58 @@
 
         <TextView
             android:id="@+id/tv_player1_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Player1" />
-
-        <TextView
-            android:id="@+id/tv_score_top"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="2"
+            tools:text="Player1"
+            style="@style/GameWindowTheme"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_player1_score"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/GameWindowTheme"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=":"
+                style="@style/GameWindowTheme"/>
+
+            <TextView
+                android:id="@+id/tv_player2_score"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/GameWindowTheme"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_player2_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="Player2" />
+            android:layout_weight="2"
+            tools:text="Player2"
+            style="@style/GameWindowTheme"/>
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_next_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="next game"
+        android:textAllCaps="true"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:id="@+id/ll_extra_players"
@@ -42,22 +78,49 @@
 
         <TextView
             android:id="@+id/tv_player3_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Player1" />
-
-        <TextView
-            android:id="@+id/tv_score_bottom"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="2"
+            tools:text="Player1"
+            style="@style/GameWindowTheme"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_player3_score"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/GameWindowTheme"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=":"
+                style="@style/GameWindowTheme"/>
+
+            <TextView
+                android:id="@+id/tv_player4_score"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                style="@style/GameWindowTheme"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_player4_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:visibility="invisible"
-            tools:text="Player2" />
+            tools:text="Player4"
+            style="@style/GameWindowTheme"/>
 
     </LinearLayout>
 

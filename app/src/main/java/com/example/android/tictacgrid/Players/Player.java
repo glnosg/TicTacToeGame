@@ -16,8 +16,10 @@ import java.util.Collections;
 public abstract class Player {
 
     protected Context mContext;
-    private int mHowManyInLineToWin = 5;
+    private int mHowManyInLineToWin;
+    protected int mScore = 0;
     private String mPlayerName;
+
     private ArrayList<int[]> mListOfClickedFields;
     private ArrayList<int[]> mListOfPotentiallyWinningFields;
     private ArrayList<int[]> mListOfWinningFields;
@@ -46,8 +48,22 @@ public abstract class Player {
         return mListOfWinningFields;
     }
 
+    public int getScore() {
+        return mScore;
+    }
+
+    public void incrementScore() {
+        mScore++;
+    }
+
     public void setHowManyInLineToWin (int howMany) {
         mHowManyInLineToWin = howMany;
+    }
+
+    public void resetClickedFieldsState() {
+        mListOfClickedFields = new ArrayList<>();
+        mListOfPotentiallyWinningFields = new ArrayList<>();
+        mListOfWinningFields = new ArrayList<>();
     }
 
     public boolean makeMove(int[] coords) {
@@ -275,11 +291,11 @@ public abstract class Player {
                 mListOfPotentiallyWinningFields = new ArrayList<>();
                 mListOfPotentiallyWinningFields.add(firstPotentiallyWinningPoint);
 
-                if (functForward(i, currentlyCheckedY, xValuesForWhichCheckYs, conditionCounter)) {
+                if (checkForwardDiagonal(i, currentlyCheckedY, xValuesForWhichCheckYs, conditionCounter)) {
                     return true;
                 }
 
-                if (functBackward(i, currentlyCheckedY, xValuesForWhichCheckYs, conditionCounter)) {
+                if (checkBackwardDiagonal(i, currentlyCheckedY, xValuesForWhichCheckYs, conditionCounter)) {
                     return true;
                 }
             }
@@ -375,7 +391,7 @@ public abstract class Player {
         return false;
     }
 
-    private boolean functForward (
+    private boolean checkForwardDiagonal(
             int currentIndex,
             int currentlyCheckedY,
             ArrayList<Integer> xValuesForWhichCheckYs,
@@ -401,7 +417,7 @@ public abstract class Player {
                     mListOfWinningFields = mListOfPotentiallyWinningFields;
                     return true;
                 }
-                if (functForward(currentIndex + 1, currentlyCheckedNextY, xValuesForWhichCheckYs, conditionCounter)) {
+                if (checkForwardDiagonal(currentIndex + 1, currentlyCheckedNextY, xValuesForWhichCheckYs, conditionCounter)) {
                     return true;
                 }
             }
@@ -410,7 +426,7 @@ public abstract class Player {
         return false;
     }
 
-    private boolean functBackward (
+    private boolean checkBackwardDiagonal(
             int currentIndex,
             int currentlyCheckedY,
             ArrayList<Integer> xValuesForWhichCheckYs,
@@ -436,7 +452,7 @@ public abstract class Player {
                     mListOfWinningFields = mListOfPotentiallyWinningFields;
                     return true;
                 }
-                if (functBackward(currentIndex + 1, currentlyCheckedNextY, xValuesForWhichCheckYs, conditionCounter)) {
+                if (checkBackwardDiagonal(currentIndex + 1, currentlyCheckedNextY, xValuesForWhichCheckYs, conditionCounter)) {
                     return true;
                 }
             }
