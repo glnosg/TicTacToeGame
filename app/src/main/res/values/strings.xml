@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TicTacGrid</string>
+    <string name="title_activity_multiplayer_menu">MultiplayerMenuActivity</string>
 </resources>

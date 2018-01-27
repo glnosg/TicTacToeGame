@@ -5,50 +5,75 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.android.tictacgrid.Players.Player;
-import com.example.android.tictacgrid.Players.Player1;
-import com.example.android.tictacgrid.Players.Player2;
-import com.example.android.tictacgrid.Players.Player3;
-import com.example.android.tictacgrid.Players.Player4;
-
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    LinearLayout myLayout;
     ArrayList<Player> listOfPlayers;
+    Toast mToast;
 
-    private Button startNewGameButton;
+    Button startSinglePlayerButton;
+    Button startMultiplayerButton;
+    Button exitAppButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listOfPlayers = new ArrayList<>();
-        listOfPlayers.add(new Player1(this, "Paweł"));
-        listOfPlayers.add(new Player2(this, "Radek"));
-        listOfPlayers.add(new Player3(this, "Ania"));
-        listOfPlayers.add(new Player4(this, "Agnieszka"));
+        setButtons();
+    }
 
-        myLayout = (LinearLayout) findViewById(R.id.ll_main_layout);
+    private void setButtons() {
+        setSinglePlayerButton();
+        setMultiplayerButton();
+        setExitButton();
+    }
 
-        startNewGameButton = (Button) findViewById(R.id.button_start_game);
-        startNewGameButton.setOnClickListener(new View.OnClickListener() {
+    private void setSinglePlayerButton() {
+
+        startSinglePlayerButton = (Button) findViewById(R.id.button_single_player);
+        startSinglePlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                showToast("Opens single player mode");
+            }
+        });
+    }
 
-                ArrayList<String> names = new ArrayList<>();
-                for(Player player : listOfPlayers)
-                    names.add(player.getPlayerName());
+    private void setMultiplayerButton() {
 
-                intent.putExtra("namesOfPlayers", names);
+        startMultiplayerButton = (Button) findViewById(R.id.button_multiplayer);
+        startMultiplayerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), MultiplayerMenuActivity.class);
                 startActivity(intent);
             }
         });
+    }
+
+    private void setExitButton() {
+
+        exitAppButton = (Button) findViewById(R.id.button_exit_game);
+        exitAppButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                System.exit(0);
+            }
+        });
+    }
+
+    private void showToast(String text) {
+        if (mToast != null)
+            mToast.cancel();
+        mToast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+        mToast.show();
     }
 }

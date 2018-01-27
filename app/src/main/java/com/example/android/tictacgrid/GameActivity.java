@@ -2,7 +2,6 @@ package com.example.android.tictacgrid;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -29,10 +28,10 @@ import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
 
-    int numOfGridColumns = 15;
-    int numOfGridRows = 20;
+    int numOfGridColumns;
+    int numOfGridRows;
+    int howManyFiguresInLineToWin;
     int clickedFieldsCounter = 0;
-    int howManyFiguresInLineToWin = 5;
     boolean isGameFinished = false;
 
     ArrayList<Player> listOfPlayers;
@@ -56,6 +55,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void buildGrid() {
+
+        setGridParameters();
 
         gameLayout = (LinearLayout) findViewById(R.id.ll_game_layout);
 
@@ -108,6 +109,14 @@ public class GameActivity extends AppCompatActivity {
                         }
 
                     }});
+    }
+
+    private void setGridParameters() {
+        int[] gridSize = getIntent().getIntArrayExtra("gridDimens");
+        numOfGridColumns = gridSize[0];
+        numOfGridRows = gridSize[1];
+
+        howManyFiguresInLineToWin = getIntent().getIntExtra("howManyInLineToWin", 3);
     }
 
     private void setUpGame() {

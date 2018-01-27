@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    android:id="@+id/ll_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -32,24 +31,17 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/button_single_player"
+                android:id="@+id/button_standard_game"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="single player"
+                android:text="standard  1 vs 1"
                 style="@style/MenuButtonTheme"/>
 
             <Button
-                android:id="@+id/button_multiplayer"
+                android:id="@+id/button_custom_game"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="multiplayer"
-                style="@style/MenuButtonTheme"/>
-
-            <Button
-                android:id="@+id/button_exit_game"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="exit game"
+                android:text="custom game"
                 style="@style/MenuButtonTheme"/>
 
         </LinearLayout>
