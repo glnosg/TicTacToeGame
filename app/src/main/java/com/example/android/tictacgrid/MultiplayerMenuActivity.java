@@ -51,17 +51,7 @@ public class MultiplayerMenuActivity extends AppCompatActivity {
         startStandardGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), GameActivity.class);
-
-                ArrayList<String> names = new ArrayList<>();
-                for(int i = 0; i < 2; ++i)
-                    names.add(listOfPlayers.get(i).getPlayerName());
-
-                int[] dimens = {3, 3};
-
-                intent.putExtra("namesOfPlayers", names);
-                intent.putExtra("gridDimens", dimens);
-                intent.putExtra("howManyInLineToWin", 3);
+                Intent intent = new Intent(getApplicationContext(), StandardMultiplayerSettingsActivity.class);
                 startActivity(intent);
             }
         });
