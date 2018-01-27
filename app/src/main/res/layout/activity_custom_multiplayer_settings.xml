@@ -103,10 +103,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_player3_settings"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"
@@ -129,10 +131,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_player4_settings"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"
@@ -187,6 +191,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:inputType="numberDecimal"
                 android:hint="15"/>
 
         </LinearLayout>
@@ -213,6 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:inputType="numberDecimal"
                 android:hint="20"/>
 
         </LinearLayout>
@@ -250,6 +256,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:inputType="numberDecimal"
                 android:hint="5"/>
 
         </LinearLayout>

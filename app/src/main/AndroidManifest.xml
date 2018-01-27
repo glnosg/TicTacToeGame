@@ -24,13 +24,19 @@
 
         <activity
             android:name=".MultiplayerMenuActivity"
-            android:label="@string/title_activity_multiplayer_menu"/>
+            android:label="@string/title_activity_multiplayer_menu"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".StandardMultiplayerSettingsActivity"
-            android:label="@string/title_activity_multiplayer_standard"/>
+            android:label="@string/title_activity_multiplayer_standard"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".CustomMultiplayerSettingsActivity"
-            android:label="@string/title_activity_multiplayer_custom"/>
+            android:label="@string/title_activity_multiplayer_custom"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
 
     </application>
 

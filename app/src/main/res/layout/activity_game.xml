@@ -118,25 +118,33 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical|horizontal">
 
-        <GridLayout
-            android:id="@+id/gv_game_grid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/colorGameGridFrame" />
-
-        <Button
-            android:id="@+id/button_next_game"
+        <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="next game"
-            android:textAllCaps="true"
-            android:visibility="gone"/>
+            android:layout_height="wrap_content">
 
-    </FrameLayout>
+            <GridLayout
+                android:id="@+id/gv_game_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/colorGameGridFrame" />
+
+            <Button
+                android:id="@+id/button_next_game"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="next game"
+                android:textAllCaps="true"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+    </ScrollView>
+
 </LinearLayout>
