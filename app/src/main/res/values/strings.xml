@@ -1,4 +1,6 @@
 <resources>
-    <string name="app_name">TicTacGrid</string>
-    <string name="title_activity_multiplayer_menu">MultiplayerMenuActivity</string>
+    <string name="app_name">GLN Tic Tac Toe</string>
+    <string name="title_activity_multiplayer_menu">Multiplayer Menu</string>
+    <string name="title_activity_multiplayer_standard">Standard Game Settings</string>
+    <string name="title_activity_multiplayer_custom">Custom Game Settings</string>
 </resources>

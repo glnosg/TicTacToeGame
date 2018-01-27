@@ -24,12 +24,14 @@
 
         <activity
             android:name=".MultiplayerMenuActivity"
-            android:label="@string/title_activity_multiplayer_menu"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:label="@string/title_activity_multiplayer_menu"/>
 
         <activity android:name=".StandardMultiplayerSettingsActivity"
-            android:label="@string/title_activity_multiplayer_menu"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:label="@string/title_activity_multiplayer_standard"/>
+
+        <activity android:name=".CustomMultiplayerSettingsActivity"
+            android:label="@string/title_activity_multiplayer_custom"/>
+
     </application>
 
 </manifest>
