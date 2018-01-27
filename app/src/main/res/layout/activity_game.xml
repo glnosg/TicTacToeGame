@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
-    android:background="@color/colorGameGridCellBackground">
+    android:background="@color/colorPrimaryDark">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,15 +59,6 @@
             style="@style/GameWindowTheme"/>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/button_next_game"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="next game"
-        android:textAllCaps="true"
-        android:visibility="gone"/>
 
     <LinearLayout
         android:id="@+id/ll_extra_players"
@@ -124,11 +115,25 @@
 
     </LinearLayout>
 
-    <GridLayout
-        android:id="@+id/gv_game_grid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/colorGameGridFrame" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+        <GridLayout
+            android:id="@+id/gv_game_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/colorGameGridFrame" />
+
+        <Button
+            android:id="@+id/button_next_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="next game"
+            android:textAllCaps="true"
+            android:visibility="gone"/>
+
+    </FrameLayout>
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.example.android.tictacgrid;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -136,7 +137,7 @@ public class GameActivity extends AppCompatActivity {
         if (currentPlayer == null) {
             currentPlayer = listOfPlayers.get(0);
             listOfPlayersTextViews.get(0).
-                    setBackgroundColor(getResources().getColor(R.color.colorActivePlayerBackground));
+                    setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
 
         resetButton = (Button) findViewById(R.id.button_next_game);
@@ -250,16 +251,16 @@ public class GameActivity extends AppCompatActivity {
         int currentPlayerIndex = listOfPlayers.indexOf(currentPlayer);
 
         listOfPlayersTextViews.get(currentPlayerIndex)
-                .setBackgroundColor(getResources().getColor(R.color.colorGameGridCellBackground));
+                .setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
 
         if (currentPlayerIndex == (listOfPlayers.size() - 1)) {
             currentPlayer = listOfPlayers.get(0);
             listOfPlayersTextViews.get(0)
-                    .setBackgroundColor(getResources().getColor(R.color.colorActivePlayerBackground));
+                    .setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         } else {
             currentPlayer = listOfPlayers.get(currentPlayerIndex + 1);
             listOfPlayersTextViews.get(currentPlayerIndex + 1)
-                    .setBackgroundColor(getResources().getColor(R.color.colorActivePlayerBackground));
+                    .setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
     }
 

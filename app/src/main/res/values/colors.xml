@@ -22,5 +22,5 @@
     <color name="colorGameGridCellBackground">#FAFAFA</color>
 
     <!-- Players display colors -->
-    <color name="colorActivePlayerBackground">#9FA8DA</color>
+    <color name="colorActivePlayerBackground">#EDE7F6</color>
 </resources>
