@@ -34,21 +34,21 @@
                 android:id="@+id/button_single_player"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="single player"
+                android:text="@string/string_main_menu_single_player"
                 style="@style/MenuButtonTheme"/>
 
             <Button
                 android:id="@+id/button_multiplayer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="multiplayer"
+                android:text="@string/string_main_menu_multiplayer"
                 style="@style/MenuButtonTheme"/>
 
             <Button
                 android:id="@+id/button_exit_game"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="exit game"
+                android:text="@string/string_main_menu_exit_game"
                 style="@style/MenuButtonTheme"/>
 
         </LinearLayout>

@@ -127,8 +127,6 @@ public class CustomMultiplayerSettingsActivity extends AppCompatActivity {
 
                 for (int i = 0; i < enteredDimens.length; ++i) {
 
-                    Log.d("Custom", "" + enteredDimens[i]);
-
                     if (!enteredDimens[i].equals("")) {
                         try {
                             gridDimens[i] = Integer.parseInt(enteredDimens[i]);

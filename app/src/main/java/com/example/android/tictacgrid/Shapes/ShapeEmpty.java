@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
+import com.example.android.tictacgrid.R;
+
 
 /**
  * Created by pawel on 20.01.18.
@@ -17,6 +19,6 @@ public class ShapeEmpty extends ShapeView {
 
     @Override
     void drawFigure(Canvas canvas) {
-        canvas.drawColor(Color.parseColor("#FAFAFA"));
+        canvas.drawColor(getResources().getColor(R.color.colorGameGridCellBackground));
     }
 }

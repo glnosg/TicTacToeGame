@@ -1,6 +1,41 @@
 <resources>
+
+    <!-- Action bar strings -->
     <string name="app_name">GLN Tic Tac Toe</string>
     <string name="title_activity_multiplayer_menu">Multiplayer Menu</string>
     <string name="title_activity_multiplayer_standard">Standard Game Settings</string>
     <string name="title_activity_multiplayer_custom">Custom Game Settings</string>
+
+    <!-- Main menu strings -->
+    <string name="string_main_menu_single_player">Single player</string>
+    <string name="string_main_menu_multiplayer">Multiplayer</string>
+    <string name="string_main_menu_exit_game">Exit game</string>
+
+    <!-- Multiplayer menu strings -->
+    <string name="string_multiplayer_menu_standard">Standard  1 vs 1</string>
+    <string name="string_multiplayer_menu_custom">Custom game</string>
+
+    <!-- Multiplayer settings strings -->
+    <string name="string_multiplayer_settings_players_settings">Players settings</string>
+    <string name="string_multiplayer_settings_num_of_players">Number of players: </string>
+    <string name="string_multiplayer_settings_name_p1">Player 1 name: </string>
+    <string name="string_multiplayer_settings_name_p2">Player 2 name: </string>
+    <string name="string_multiplayer_settings_name_p3">Player 3 name: </string>
+    <string name="string_multiplayer_settings_name_p4">Player 4 name: </string>
+
+    <string name="string_multiplayer_settings_grid_size">Game grid size</string>
+    <string name="string_multiplayer_settings_num_of_cols">Number of columns: </string>
+    <string name="string_multiplayer_settings_num_of_rows">Number of rows: </string>
+
+    <string name="string_multiplayer_settings_winning_cond">Winning condition</string>
+    <string name="string_multiplayer_settings_how_many_in_row">How many in row to win: </string>
+
+    <string name="string_multiplayer_settings_start_game">Start game</string>
+
+    <!-- Game play window strings -->
+    <string name="string_gameplay_games_played">Games played: </string>
+    <string name="string_gameplay_next_game">Next game</string>
+    <string name="string_gameplay_draw">Draw!</string>
+    <string name="string_gameplay_won"> won!</string>
+
 </resources>

@@ -8,6 +8,12 @@
     android:baselineAligned="false"
     android:background="@color/colorPrimaryDark">
 
+    <TextView
+        android:id="@+id/tv_games_played"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/GameWindowTheme"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -139,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="next game"
+                android:text="@string/string_gameplay_next_game"
                 android:textAllCaps="true"
                 android:visibility="gone"/>
 

@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Players settings"
+            android:text="@string/string_multiplayer_settings_players_settings"
             style="@style/GameWindowTheme"/>
 
         <LinearLayout
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="25"
                 android:layout_gravity="center"
-                android:text="Number of players: "
+                android:text="@string/string_multiplayer_settings_num_of_players"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:textColor="@android:color/white"
                 android:textAllCaps="true"/>
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:text="Player 1  name: "
+                android:text="@string/string_multiplayer_settings_name_p1"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:textColor="@android:color/white"
                 android:textAllCaps="true"/>
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:text="Player 2  name: "
+                android:text="@string/string_multiplayer_settings_name_p2"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:textColor="@android:color/white"
                 android:textAllCaps="true"/>
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:text="Player 3  name: "
+                android:text="@string/string_multiplayer_settings_name_p3"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:textColor="@android:color/white"
                 android:textAllCaps="true"/>
@@ -143,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:text="Player 4  name: "
+                android:text="@string/string_multiplayer_settings_name_p4"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:textColor="@android:color/white"
                 android:textAllCaps="true"/>
@@ -166,7 +166,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Game grid size"
+            android:text="@string/string_multiplayer_settings_grid_size"
             style="@style/GameWindowTheme"/>
 
         <LinearLayout
@@ -180,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:layout_gravity="center"
-                android:text="Number of columns: "
+                android:text="@string/string_multiplayer_settings_num_of_cols"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:textColor="@android:color/white"
                 android:textAllCaps="true"/>
@@ -207,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:layout_gravity="center"
-                android:text="Number of rows: "
+                android:text="@string/string_multiplayer_settings_num_of_rows"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:textColor="@android:color/white"
                 android:textAllCaps="true"/>
@@ -231,7 +231,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Winning condition"
+            android:text="@string/string_multiplayer_settings_winning_cond"
             style="@style/GameWindowTheme"/>
 
         <LinearLayout
@@ -245,7 +245,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:layout_gravity="center"
-                android:text="How many in row to win: "
+                android:text="@string/string_multiplayer_settings_how_many_in_row"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:textColor="@android:color/white"
                 android:textAllCaps="true"/>
@@ -278,7 +278,7 @@
                 android:id="@+id/button_standard_game_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="start game"
+                android:text="@string/string_multiplayer_settings_start_game"
                 style="@style/MenuButtonTheme"/>
 
         </LinearLayout>

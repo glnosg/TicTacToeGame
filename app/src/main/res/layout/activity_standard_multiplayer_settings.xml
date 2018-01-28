@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Players settings"
+            android:text="@string/string_multiplayer_settings_players_settings"
             style="@style/GameWindowTheme"/>
 
         <LinearLayout
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:text="Player 1  name: "
+                android:text="@string/string_multiplayer_settings_name_p1"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:textColor="@android:color/white"
                 android:textAllCaps="true"/>
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:text="Player 2  name: "
+                android:text="@string/string_multiplayer_settings_name_p2"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:textColor="@android:color/white"
                 android:textAllCaps="true"/>
@@ -93,7 +93,7 @@
                 android:id="@+id/button_standard_game_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="start game"
+                android:text="@string/string_multiplayer_settings_start_game"
                 style="@style/MenuButtonTheme"/>
 
         </LinearLayout>

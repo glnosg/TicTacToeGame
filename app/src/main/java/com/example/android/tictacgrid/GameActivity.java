@@ -32,6 +32,7 @@ public class GameActivity extends AppCompatActivity {
     int numOfGridRows;
     int howManyFiguresInLineToWin;
     int clickedFieldsCounter = 0;
+    int gamesPlayed = 0;
     boolean isGameFinished = false;
 
     ArrayList<Player> listOfPlayers;
@@ -44,6 +45,7 @@ public class GameActivity extends AppCompatActivity {
     ArrayList<TextView> listOfScoresTextViews;
     GridLayout gameGrid;
     GridLayout.LayoutParams gameGridLayoutParams;
+    TextView gamesPlayedTextView;
     Button resetButton;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -120,6 +122,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setUpGame() {
+
+        gamesPlayedTextView = (TextView) findViewById(R.id.tv_games_played);
+        gamesPlayedTextView.setText(getString(R.string.string_gameplay_games_played) + gamesPlayed);
 
         listOfPlayersTextViews = new ArrayList<>();
         listOfScoresTextViews = new ArrayList<>();
@@ -286,15 +291,17 @@ public class GameActivity extends AppCompatActivity {
 
     private void finishGame(boolean isWinner) {
         isGameFinished = true;
+        gamesPlayed++;
+        gamesPlayedTextView.setText(getString(R.string.string_gameplay_games_played) + gamesPlayed);
         resetButton.setVisibility(View.VISIBLE);
 
         if (isWinner) {
             currentPlayer.incrementScore();
-            showToast(currentPlayer.getPlayerName() + " WON!");
+            showToast(currentPlayer.getPlayerName() + getString(R.string.string_gameplay_won));
             markWinningShapes();
             refreshScores();
         } else {
-            showToast("DRAW!");
+            showToast(getString(R.string.string_gameplay_draw));
         }
     }
 

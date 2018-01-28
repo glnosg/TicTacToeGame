@@ -7,13 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.android.tictacgrid.Players.Player;
-import java.util.ArrayList;
-
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Player> listOfPlayers;
     Toast mToast;
 
     Button startSinglePlayerButton;
