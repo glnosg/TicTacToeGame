@@ -367,7 +367,16 @@ public class GameActivity extends AppCompatActivity {
         } else {
             indexOfPlayerStartingTheGame++;
         }
+
+        int currentPlayerIndex = listOfPlayers.indexOf(currentPlayer);
+        listOfPlayersTextViews.get(currentPlayerIndex)
+                .setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+
         currentPlayer = listOfPlayers.get(indexOfPlayerStartingTheGame);
+
+        currentPlayerIndex = listOfPlayers.indexOf(currentPlayer);
+        listOfPlayersTextViews.get(currentPlayerIndex)
+                .setBackgroundColor(getResources().getColor(R.color.colorPrimary));
     }
 
     // Switches value of isGameFinished flag to true
