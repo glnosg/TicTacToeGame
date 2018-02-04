@@ -2,7 +2,6 @@ package com.example.android.tictacgrid.Shapes;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 
 import com.example.android.tictacgrid.R;
 

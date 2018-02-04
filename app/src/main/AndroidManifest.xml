@@ -22,6 +22,11 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".SinglePlayerMenuActivity"
+            android:label="@string/title_activity_multiplayer_custom"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".MultiplayerMenuActivity"
             android:label="@string/title_activity_multiplayer_menu"

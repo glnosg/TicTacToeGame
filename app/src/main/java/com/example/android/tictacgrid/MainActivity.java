@@ -10,8 +10,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Toast mToast;
-
     Button startSinglePlayerButton;
     Button startMultiplayerButton;
     Button exitAppButton;
@@ -36,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
         startSinglePlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToast("Opens single player mode");
+
+                Intent intent = new Intent(getApplicationContext(), SinglePlayerMenuActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -64,12 +64,5 @@ public class MainActivity extends AppCompatActivity {
                 System.exit(0);
             }
         });
-    }
-
-    private void showToast(String text) {
-        if (mToast != null)
-            mToast.cancel();
-        mToast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
-        mToast.show();
     }
 }

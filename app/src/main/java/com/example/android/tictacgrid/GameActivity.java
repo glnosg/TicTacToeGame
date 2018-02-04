@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 
+import com.example.android.tictacgrid.Players.AI.BotEasy;
+import com.example.android.tictacgrid.Players.AI.BotPlayer;
 import com.example.android.tictacgrid.Players.Player;
 import com.example.android.tictacgrid.Players.Player1;
 import com.example.android.tictacgrid.Players.Player2;
@@ -165,6 +167,9 @@ public class GameActivity extends AppCompatActivity {
         // (depending on how many names was provided in intent extra)
         switch (namesOfPlayers.size()) {
 
+            case 1:
+                startGameWithBot(namesOfPlayers.get(0));
+                break;
             case 2:
                 addTwoPlayers(namesOfPlayers);
                 break;
@@ -200,6 +205,35 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
+    // Adds two players to game
+    // First player is a human player with name "You"
+    // Second player is a bot player
+    // Depending on name received from intent extra, appropriate bot is created (easy, medium or hard)
+    private void startGameWithBot(String botName) {
+        listOfPlayers.add(new Player1(this, "You"));
+
+        switch (botName) {
+            case "Easy Bot":
+                listOfPlayers.add(new BotEasy(this, botName));
+                break;
+            case "Medium Bot":
+                listOfPlayers.add(new BotEasy(this, botName));
+                break;
+            case "Hard Bot":
+                listOfPlayers.add(new BotEasy(this, botName));
+                break;
+        }
+
+        listOfPlayersTextViews.add((TextView) findViewById(R.id.tv_player1_name));
+        listOfPlayersTextViews.get(0).setText(listOfPlayers.get(0).getPlayerName());
+        listOfScoresTextViews.add((TextView) findViewById(R.id.tv_player1_score));
+        listOfScoresTextViews.get(0).setText(Integer.toString(listOfPlayers.get(0).getScore()));
+
+        listOfPlayersTextViews.add((TextView) findViewById(R.id.tv_player2_name));
+        listOfPlayersTextViews.get(1).setText(listOfPlayers.get(1).getPlayerName());
+        listOfScoresTextViews.add((TextView) findViewById(R.id.tv_player2_score));
+        listOfScoresTextViews.get(1).setText(Integer.toString(listOfPlayers.get(0).getScore()));
+    }
 
     // Adds new player objects to list of players
     // Each player object is initialized with name received in extra
@@ -249,8 +283,8 @@ public class GameActivity extends AppCompatActivity {
 
     // Sets onClickListener of field with coords sent as a parameter
     // if game is not finished yet it addNewShape() method is called with current coordinates
-    // after move current player's makeMove() method is called (also with these coordinates)
-    // if makeMove returns true (player won), game is finished
+    // after move current player's checkMove() method is called (also with these coordinates)
+    // if checkMove returns true (player won), game is finished
     // if it returns false (player didn't win), changePlayer() method is called
     private void setFieldListener(final int[] coords) {
 
@@ -260,7 +294,7 @@ public class GameActivity extends AppCompatActivity {
 
                 if (!isGameFinished) {
                     addNewShape(coords);
-                    if (currentPlayer.makeMove(coords)) {
+                    if (currentPlayer.checkMove(coords)) {
                         finishGame(true);
                     } else {
                         if (clickedFieldsCounter == numOfGridRows * numOfGridColumns) {
@@ -339,6 +373,10 @@ public class GameActivity extends AppCompatActivity {
             listOfPlayersTextViews.get(currentPlayerIndex + 1)
                     .setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
+
+        if (currentPlayer instanceof BotPlayer) {
+            triggerBot();
+        }
     }
 
     // Button view is removed from layout (View.GONE)
@@ -359,6 +397,13 @@ public class GameActivity extends AppCompatActivity {
         setStartingPlayer();
     }
 
+    // Method triggers bot, so it could make its move
+    private void triggerBot() {
+        BotPlayer bot = (BotPlayer) currentPlayer;
+        int fieldChosenByBot = bot.makeMove(currentViewsInGameGrid);
+        gameGrid.getChildAt(fieldChosenByBot).callOnClick();
+    }
+
     // Sets index of player who makes first move in current game
     private void setStartingPlayer() {
 
@@ -377,6 +422,10 @@ public class GameActivity extends AppCompatActivity {
         currentPlayerIndex = listOfPlayers.indexOf(currentPlayer);
         listOfPlayersTextViews.get(currentPlayerIndex)
                 .setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+        if (currentPlayer instanceof BotPlayer) {
+            triggerBot();
+        }
     }
 
     // Switches value of isGameFinished flag to true
@@ -407,12 +456,14 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    // Method sets scores text views to a current values
     private void refreshScores() {
         for (int i = 0; i < listOfPlayers.size(); ++i) {
             listOfScoresTextViews.get(i).setText(Integer.toString(listOfPlayers.get(i).getScore()));
         }
     }
 
+    // Helper method for showing Toast messages
     private void showToast(String text) {
         if (mToast != null)
             mToast.cancel();

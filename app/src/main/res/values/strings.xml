@@ -11,6 +11,11 @@
     <string name="string_main_menu_multiplayer">Multiplayer</string>
     <string name="string_main_menu_exit_game">Exit game</string>
 
+    <!-- Single Player menu strings -->
+    <string name="string_single_player_menu_easy">Easy</string>
+    <string name="string_single_player_menu_medim">Medium</string>
+    <string name="string_single_player_menu_hard">Hard</string>
+
     <!-- Multiplayer menu strings -->
     <string name="string_multiplayer_menu_standard">Standard  1 vs 1</string>
     <string name="string_multiplayer_menu_custom">Custom game</string>

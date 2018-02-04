@@ -88,7 +88,7 @@ public abstract class Player {
     }
 
     // Method triggered when player makes a move
-    public boolean makeMove(int[] coords) {
+    public boolean checkMove(int[] coords) {
         // New coords are added to list of clicked fields
         mListOfClickedFields.add(coords);
 
