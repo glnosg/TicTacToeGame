@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Created by pawel on 04.02.18.
  */
 
-public class RandomMove implements MoveAlgorithm {
+public class RandomMoveAlgorithm implements MoveAlgorithm {
 
     @Override
     public int move(int[] currentStateOfGameGrid) {

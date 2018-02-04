@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class SinglePlayerMenuActivity extends AppCompatActivity {
 
-    private Toast mToast;
     static final int[] STANDARD_GAME_GRID_DIMENSIONS = {3, 3};
     static final int STANDARD_WINNING_CONDITION = 3;
 
@@ -56,7 +55,7 @@ public class SinglePlayerMenuActivity extends AppCompatActivity {
         startMediumGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToast("Medium Bot");
+                openGame("Medium Bot");
             }
         });
     }
@@ -67,7 +66,7 @@ public class SinglePlayerMenuActivity extends AppCompatActivity {
         startHardGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showToast("Hard Bot");
+                openGame("Hard Bot");
             }
         });
     }
@@ -82,12 +81,5 @@ public class SinglePlayerMenuActivity extends AppCompatActivity {
         intent.putExtra("gridDimens", STANDARD_GAME_GRID_DIMENSIONS);
         intent.putExtra("howManyInLineToWin", STANDARD_WINNING_CONDITION);
         startActivity(intent);
-    }
-
-    private void showToast(String text) {
-        if (mToast != null)
-            mToast.cancel();
-        mToast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
-        mToast.show();
     }
 }

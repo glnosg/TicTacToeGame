@@ -12,6 +12,8 @@ import android.widget.Toast;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 
 import com.example.android.tictacgrid.Players.AI.BotEasy;
+import com.example.android.tictacgrid.Players.AI.BotHard;
+import com.example.android.tictacgrid.Players.AI.BotMedium;
 import com.example.android.tictacgrid.Players.AI.BotPlayer;
 import com.example.android.tictacgrid.Players.Player;
 import com.example.android.tictacgrid.Players.Player1;
@@ -217,10 +219,10 @@ public class GameActivity extends AppCompatActivity {
                 listOfPlayers.add(new BotEasy(this, botName));
                 break;
             case "Medium Bot":
-                listOfPlayers.add(new BotEasy(this, botName));
+                listOfPlayers.add(new BotMedium(this, botName));
                 break;
             case "Hard Bot":
-                listOfPlayers.add(new BotEasy(this, botName));
+                listOfPlayers.add(new BotHard(this, botName));
                 break;
         }
 
