@@ -1,20 +1,18 @@
 package com.example.android.tictacgrid.Players.AI.BotMoveAlgorithms;
 
-
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 /**
  * Created by pawel on 04.02.18.
  */
 
-public class MinimaxMediumMoveAlgorithm implements MoveAlgorithm {
+public class MinimaxEasyAlgorithm implements MoveAlgorithm {
 
-    private static final int MAX_DEPTH = 3;
-    private static final int PERCENT_OF_CHANCE_FOR_RANDOM_MOVE = 10;
+    private static final int MAX_DEPTH = 2;
+    private static final int PERCENT_OF_CHANCE_FOR_RANDOM_MOVE = 40;
 
     @Override
     public int move(int[] currentStateOfGameGrid) {
@@ -115,7 +113,7 @@ public class MinimaxMediumMoveAlgorithm implements MoveAlgorithm {
         }
 
         int sizeOfList = emptyFieldsForRandom.size();
-        Log.d("Medium Bot", "Random move performed");
+        Log.d("Easy Bot", "Random move performed");
         return emptyFieldsForRandom.get((int) Math.random() * sizeOfList);
     }
 }

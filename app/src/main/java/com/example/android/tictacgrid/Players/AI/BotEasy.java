@@ -3,6 +3,7 @@ package com.example.android.tictacgrid.Players.AI;
 
 import android.content.Context;
 
+import com.example.android.tictacgrid.Players.AI.BotMoveAlgorithms.MinimaxEasyAlgorithm;
 import com.example.android.tictacgrid.Players.AI.BotMoveAlgorithms.RandomMoveAlgorithm;
 
 /**
@@ -13,11 +14,11 @@ public class BotEasy extends BotPlayer {
 
     public BotEasy(Context context) {
         super(context);
-        this.moveAlgorithm = new RandomMoveAlgorithm();
+        this.moveAlgorithm = new MinimaxEasyAlgorithm();
     }
 
     public BotEasy(Context context, String name) {
         super(context, name);
-        this.moveAlgorithm = new RandomMoveAlgorithm();
+        this.moveAlgorithm = new MinimaxEasyAlgorithm();
     }
 }
