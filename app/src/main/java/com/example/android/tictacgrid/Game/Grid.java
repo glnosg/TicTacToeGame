@@ -14,5 +14,6 @@ public interface Grid {
     void setClickedFieldsCounter (int newCounterValue);
     void clearGrid();
     void markWinningShapes();
+    void setGame(Game game);
     ShapeView[] getCurrentViewsInGameGrid();
 }

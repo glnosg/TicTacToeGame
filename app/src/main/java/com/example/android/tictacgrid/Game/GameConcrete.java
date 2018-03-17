@@ -40,7 +40,7 @@ public class GameConcrete implements Game {
     private TextView mGamesPlayedTV;
     private Button mNextGameButton;
 
-    private Grid grid;
+    private Grid mGrid;
 
     public GameConcrete (
             Context context,
@@ -58,12 +58,16 @@ public class GameConcrete implements Game {
         this.mNextGameButton = nextGameButton;
         this.mListOfPlayersNames = listOfNames;
         this.mHowManyFiguresInLineToWin = howManyInLineToWin;
+
+        setUpGame();
     }
 
     @Override
     public void setUpGame() {
 
-        switch (mListOfPlayersNamesTVs.size()) {
+        mListOfPlayers = new ArrayList<>();
+
+        switch (mListOfPlayersNames.size()) {
             case 1:
                 startGameWithBot(mListOfPlayersNames.get(0));
 
@@ -111,6 +115,11 @@ public class GameConcrete implements Game {
                 resetGame();
             }
         });
+    }
+
+    @Override
+    public void setGrid(Grid grid) {
+        this.mGrid = grid;
     }
 
     private void startGameWithBot(String botName) {
@@ -170,6 +179,9 @@ public class GameConcrete implements Game {
 
         mListOfPlayersNamesTVs.get(3).setText(mListOfPlayers.get(3).getPlayerName());
         mListOfPlayersScoresTVs.get(3).setText(Integer.toString(mListOfPlayers.get(3).getScore()));
+
+        mListOfPlayersNamesTVs.get(3).setVisibility(View.VISIBLE);
+        mListOfPlayersScoresTVs.get(3).setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -200,18 +212,18 @@ public class GameConcrete implements Game {
         for (Player player : mListOfPlayers) {
             player.resetClickedFieldsState();
         }
-        grid.clearGrid();
+        mGrid.clearGrid();
         setStartingPlayer();
     }
 
     private void triggerBot() {
         BotPlayer bot = (BotPlayer) mCurrentPlayer;
-        int fieldChosenByBot = bot.makeMove(grid.getCurrentViewsInGameGrid());
-        grid.simulateClick(fieldChosenByBot);
+        int fieldChosenByBot = bot.makeMove(mGrid.getCurrentViewsInGameGrid());
+        mGrid.simulateClick(fieldChosenByBot);
     }
 
     private void setStartingPlayer() {
-        if (mIndexOfPlayerStartingTheGame == mListOfPlayers.size()) {
+        if (mIndexOfPlayerStartingTheGame == mListOfPlayers.size() - 1) {
             mIndexOfPlayerStartingTheGame = 0;
         } else {
             mIndexOfPlayerStartingTheGame++;
@@ -235,7 +247,7 @@ public class GameConcrete implements Game {
 
     @Override
     public void finishGame(boolean isWinner) {
-        grid.setIsGameFinished(true);
+        mGrid.setIsGameFinished(true);
         mGamesPlayedCounter++;
         mGamesPlayedTV.setText(mContext.getString(R.string.string_gameplay_games_played) + " " + mGamesPlayedCounter);
         mNextGameButton.setVisibility(View.VISIBLE);
@@ -243,7 +255,7 @@ public class GameConcrete implements Game {
         if (isWinner) {
             mCurrentPlayer.incrementScore();
             showToast(mCurrentPlayer.getPlayerName() + " " + mContext.getString(R.string.string_gameplay_won));
-            grid.markWinningShapes();
+            mGrid.markWinningShapes();
             refreshScores();
         } else {
             showToast(mContext.getString(R.string.string_gameplay_draw));

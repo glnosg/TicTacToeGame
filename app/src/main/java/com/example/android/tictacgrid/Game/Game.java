@@ -11,5 +11,6 @@ public interface Game {
     void setUpGame();
     void changePlayer();
     void finishGame(boolean isWinner);
+    void setGrid(Grid grid);
     Player getCurrentPlayer();
 }

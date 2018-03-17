@@ -17,7 +17,7 @@
     <color name="colorShapeTriangle">#BCAAA4</color>
     <color name="colorShapeTriangleVictoryBackground">#D7CCC8</color>
 
-    <!-- Game grid colors -->
+    <!-- GmGridgrid colors -->
     <color name="colorGameGridFrame">#EEEEEE</color>
     <color name="colorGameGridCellBackground">#FAFAFA</color>
 

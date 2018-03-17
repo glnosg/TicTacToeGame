@@ -76,7 +76,7 @@ public class GameGrid implements Grid {
 
                                 GridLayout.LayoutParams params =
                                         (GridLayout.LayoutParams) mCurrentViewsInGameGrid[
-                                                (coordY * mNumOfGridRows) + coordX].getLayoutParams();
+                                                (coordY * mNumOfGridColumns) + coordX].getLayoutParams();
 
                                 params.width = gameGridCellWidth - (2 * GRID_FRAME_WIDTH);
                                 params.height = gameGridCellHeight - (2 * GRID_FRAME_WIDTH);
@@ -145,8 +145,9 @@ public class GameGrid implements Grid {
                 GRID_FRAME_WIDTH, GRID_FRAME_WIDTH, GRID_FRAME_WIDTH, GRID_FRAME_WIDTH);
     }
 
-    public void assignGame(Game game) {
+    public void setGame(Game game) {
         this.mGame = game;
+        mGame.setGrid(this);
     }
 
     @Override
