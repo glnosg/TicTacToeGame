@@ -3,7 +3,11 @@ package com.example.android.tictacgrid.Players;
 import android.content.Context;
 import android.content.IntentFilter;
 
+import com.example.android.tictacgrid.Shapes.ShapeO;
+import com.example.android.tictacgrid.Shapes.ShapeSquare;
+import com.example.android.tictacgrid.Shapes.ShapeTriangle;
 import com.example.android.tictacgrid.Shapes.ShapeView;
+import com.example.android.tictacgrid.Shapes.ShapeX;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +16,7 @@ import java.util.Collections;
  * Created by pawel on 20.01.18.
  */
 
-public abstract class Player {
+public class Player {
 
     // Holds activity's context - it needs to be sent to Shape object's constructor
     protected Context mContext;
@@ -22,6 +26,7 @@ public abstract class Player {
     private int mScore = 0;
     // Player's name
     private String mPlayerName;
+    private int mPlayerNumber;
 
     // List of fields clicked by player in current game
     // Every field is held as int[2] array, where: arr[0] = x coordinate, arr[1] = y coordinate;
@@ -44,16 +49,36 @@ public abstract class Player {
      * @param context - activity's context
      * @param name - player's name
      */
-    public Player(Context context, String name) {
+    public Player(Context context, String name, int playerNumber) {
         this.mContext = context;
         this.mPlayerName = name;
+        this.mPlayerNumber = playerNumber;
         this.mListOfClickedFields = new ArrayList<>();
         this.mListOfWinningFields = new ArrayList<>();
     }
 
     // Method implemented in concrete player class,
     // it returns subtype of ShapeView class (shape bounded to a specific player)
-    public abstract ShapeView getShape(boolean hasWon);
+    public ShapeView getShape(boolean hasWon) {
+        ShapeView shape = null;
+
+        switch (mPlayerNumber) {
+            case 1:
+                shape = new ShapeX(mContext, hasWon);
+                break;
+            case 2:
+                shape = new ShapeO(mContext, hasWon);
+                break;
+            case 3:
+                shape = new ShapeSquare(mContext, hasWon);
+                break;
+            case 4:
+                shape = new ShapeTriangle(mContext, hasWon);
+                break;
+        }
+
+        return shape;
+    }
 
     // Returns player's name
     public String getPlayerName() {

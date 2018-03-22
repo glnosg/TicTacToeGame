@@ -46,7 +46,7 @@ public class SinglePlayerMenuActivity extends AppCompatActivity {
         startEasyGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGame("Easy Bot");
+                openGame("EasyBot");
             }
         });
     }
@@ -57,7 +57,7 @@ public class SinglePlayerMenuActivity extends AppCompatActivity {
         startMediumGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGame("Medium Bot");
+                openGame("MediumBot");
             }
         });
     }
@@ -68,7 +68,7 @@ public class SinglePlayerMenuActivity extends AppCompatActivity {
         startHardGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGame("Hard Bot");
+                openGame("HardBot");
             }
         });
     }

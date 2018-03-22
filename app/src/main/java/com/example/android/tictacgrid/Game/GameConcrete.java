@@ -6,15 +6,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.tictacgrid.Players.AI.BotEasy;
-import com.example.android.tictacgrid.Players.AI.BotHard;
-import com.example.android.tictacgrid.Players.AI.BotMedium;
 import com.example.android.tictacgrid.Players.AI.BotPlayer;
 import com.example.android.tictacgrid.Players.Player;
-import com.example.android.tictacgrid.Players.Player1;
-import com.example.android.tictacgrid.Players.Player2;
-import com.example.android.tictacgrid.Players.Player3;
-import com.example.android.tictacgrid.Players.Player4;
 import com.example.android.tictacgrid.R;
 
 import java.util.ArrayList;
@@ -123,19 +116,9 @@ public class GameConcrete implements Game {
     }
 
     private void startGameWithBot(String botName) {
-        mListOfPlayers.add(new Player1(mContext, "You"));
+        mListOfPlayers.add(new Player(mContext, "You", 1));
+        mListOfPlayers.add(new BotPlayer(mContext, botName, 2));
 
-        switch (botName) {
-            case "Easy Bot":
-                mListOfPlayers.add(new BotEasy(mContext, botName));
-                break;
-            case "Medium Bot":
-                mListOfPlayers.add(new BotMedium(mContext, botName));
-                break;
-            case "Hard Bot":
-                mListOfPlayers.add(new BotHard(mContext, botName));
-                break;
-        }
 
         mListOfPlayersNamesTVs.get(0).setText(mListOfPlayers.get(0).getPlayerName());
         mListOfPlayersScoresTVs.get(0).setText(Integer.toString(mListOfPlayers.get(0).getScore()));
@@ -149,8 +132,8 @@ public class GameConcrete implements Game {
     // text views with names and scores are bonded with players and their values are set
     private void addTwoPlayers(ArrayList<String> names) {
 
-        mListOfPlayers.add(new Player1(mContext, names.get(0)));
-        mListOfPlayers.add(new Player2(mContext, names.get(1)));
+        mListOfPlayers.add(new Player(mContext, names.get(0), 1));
+        mListOfPlayers.add(new Player(mContext, names.get(1), 2));
 
         mListOfPlayersNamesTVs.get(0).setText(mListOfPlayers.get(0).getPlayerName());
         mListOfPlayersScoresTVs.get(0).setText(Integer.toString(mListOfPlayers.get(0).getScore()));
@@ -164,7 +147,7 @@ public class GameConcrete implements Game {
 
         addTwoPlayers(names);
 
-        mListOfPlayers.add(new Player3(mContext, names.get(2)));
+        mListOfPlayers.add(new Player(mContext, names.get(2), 3));
 
         mListOfPlayersNamesTVs.get(2).setText(mListOfPlayers.get(2).getPlayerName());
         mListOfPlayersScoresTVs.get(2).setText(Integer.toString(mListOfPlayers.get(2).getScore()));
@@ -175,7 +158,7 @@ public class GameConcrete implements Game {
 
         addThreePlayers(names);
 
-        mListOfPlayers.add(new Player4(mContext, names.get(3)));
+        mListOfPlayers.add(new Player(mContext, names.get(3), 4));
 
         mListOfPlayersNamesTVs.get(3).setText(mListOfPlayers.get(3).getPlayerName());
         mListOfPlayersScoresTVs.get(3).setText(Integer.toString(mListOfPlayers.get(3).getScore()));
