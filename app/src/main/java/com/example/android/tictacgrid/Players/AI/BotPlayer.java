@@ -8,7 +8,7 @@ import com.example.android.tictacgrid.Players.AI.BotMoveAlgorithms.MinimaxMoveAl
 import com.example.android.tictacgrid.Players.AI.BotMoveAlgorithms.MoveAlgorithm;
 import com.example.android.tictacgrid.Players.Player;
 import com.example.android.tictacgrid.Shapes.ShapeEmpty;
-import com.example.android.tictacgrid.Shapes.ShapeO;
+import com.example.android.tictacgrid.Shapes.ShapeCircle;
 import com.example.android.tictacgrid.Shapes.ShapeView;
 import com.example.android.tictacgrid.Shapes.ShapeX;
 
@@ -19,7 +19,6 @@ import com.example.android.tictacgrid.Shapes.ShapeX;
 
 public class BotPlayer extends Player{
 
-    private static final int GRID_SIZE = 9;
     private int[] currentStateOfGameGrid;
     protected MoveAlgorithm moveAlgorithm;
 
@@ -53,18 +52,21 @@ public class BotPlayer extends Player{
 
         for (int i = 0; i < currentViewsInGameGrig.length; ++i) {
 
+            ShapeView botShape = this.getShape(false);
+
+
             if (currentViewsInGameGrig[i] instanceof ShapeEmpty) {
                 currentStateOfGameGrid[i] = 0;
                 numberOfEmptyFields++;
-            } else if (currentViewsInGameGrig[i] instanceof ShapeX) {
+            } else if (currentViewsInGameGrig[i].getClass().equals(botShape.getClass())) {
                 currentStateOfGameGrid[i] = -1;
-            } else if (currentViewsInGameGrig[i] instanceof ShapeO) {
+            } else {
                 currentStateOfGameGrid[i] = 1;
             }
         }
 
-       if (numberOfEmptyFields == GRID_SIZE)  {
-           return (int) (Math.random() * GRID_SIZE);
+       if (numberOfEmptyFields == currentViewsInGameGrig.length)  {
+           return (int) (Math.random() * currentViewsInGameGrig.length);
        } else {
            return moveAlgorithm.move(currentStateOfGameGrid);
        }

@@ -3,7 +3,7 @@ package com.example.android.tictacgrid.Players;
 import android.content.Context;
 import android.content.IntentFilter;
 
-import com.example.android.tictacgrid.Shapes.ShapeO;
+import com.example.android.tictacgrid.Shapes.ShapeCircle;
 import com.example.android.tictacgrid.Shapes.ShapeSquare;
 import com.example.android.tictacgrid.Shapes.ShapeTriangle;
 import com.example.android.tictacgrid.Shapes.ShapeView;
@@ -67,7 +67,7 @@ public class Player {
                 shape = new ShapeX(mContext, hasWon);
                 break;
             case 2:
-                shape = new ShapeO(mContext, hasWon);
+                shape = new ShapeCircle(mContext, hasWon);
                 break;
             case 3:
                 shape = new ShapeSquare(mContext, hasWon);

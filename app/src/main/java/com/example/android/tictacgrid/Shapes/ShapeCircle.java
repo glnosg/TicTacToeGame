@@ -12,13 +12,13 @@ import com.example.android.tictacgrid.R;
  * Created by pawel on 20.01.18.
  */
 
-public class ShapeO extends ShapeView {
+public class ShapeCircle extends ShapeView {
 
-    public ShapeO(Context context) {
+    public ShapeCircle(Context context) {
         super(context);
     }
 
-    public ShapeO(Context context, boolean hasWon) {
+    public ShapeCircle(Context context, boolean hasWon) {
         super(context, hasWon);
     }
 
