@@ -1,6 +1,7 @@
 package com.example.android.tictacgrid.Players.AI;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.android.tictacgrid.Players.AI.BotMoveAlgorithms.MinimaxEasyAlgorithm;
 import com.example.android.tictacgrid.Players.AI.BotMoveAlgorithms.MinimaxMediumMoveAlgorithm;
@@ -8,9 +9,7 @@ import com.example.android.tictacgrid.Players.AI.BotMoveAlgorithms.MinimaxMoveAl
 import com.example.android.tictacgrid.Players.AI.BotMoveAlgorithms.MoveAlgorithm;
 import com.example.android.tictacgrid.Players.Player;
 import com.example.android.tictacgrid.Shapes.ShapeEmpty;
-import com.example.android.tictacgrid.Shapes.ShapeCircle;
 import com.example.android.tictacgrid.Shapes.ShapeView;
-import com.example.android.tictacgrid.Shapes.ShapeX;
 
 
 /**
@@ -54,14 +53,13 @@ public class BotPlayer extends Player{
 
             ShapeView botShape = this.getShape(false);
 
-
             if (currentViewsInGameGrig[i] instanceof ShapeEmpty) {
                 currentStateOfGameGrid[i] = 0;
                 numberOfEmptyFields++;
             } else if (currentViewsInGameGrig[i].getClass().equals(botShape.getClass())) {
-                currentStateOfGameGrid[i] = -1;
-            } else {
                 currentStateOfGameGrid[i] = 1;
+            } else {
+                currentStateOfGameGrid[i] = -1;
             }
         }
 
