@@ -15,7 +15,7 @@ public class MinimaxMoveAlgorithm implements MoveAlgorithm {
     private static final int MAX_DEPTH = 7;
 
     private static final int VALUE_OF_BOT = 1;
-    private static final int VALUE_OF_PLAYER= -1;
+    private static final int VALUE_OF_PLAYER = -1;
 
     private static final int INITIAL_VALUE_OF_ALPHA = (int) Float.NEGATIVE_INFINITY;
     private static final int INITIAL_VALUE_OF_BETA = (int) Float.POSITIVE_INFINITY;

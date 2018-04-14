@@ -16,7 +16,7 @@ import com.example.android.tictacgrid.Shapes.ShapeView;
  * Created by pawel on 03.02.18.
  */
 
-public class BotPlayer extends Player{
+public class BotPlayer extends Player {
 
     private int[] currentStateOfGameGrid;
     protected MoveAlgorithm moveAlgorithm;
@@ -44,27 +44,27 @@ public class BotPlayer extends Player{
         }
     }
 
-    public int makeMove(ShapeView[] currentViewsInGameGrig) {
+    public int makeMove(ShapeView[] currentViewsInGameGrid) {
 
-        currentStateOfGameGrid = new int[currentViewsInGameGrig.length];
+        currentStateOfGameGrid = new int[currentViewsInGameGrid.length];
         int numberOfEmptyFields = 0;
 
-        for (int i = 0; i < currentViewsInGameGrig.length; ++i) {
+        for (int i = 0; i < currentViewsInGameGrid.length; ++i) {
 
             ShapeView botShape = this.getShape(false);
 
-            if (currentViewsInGameGrig[i] instanceof ShapeEmpty) {
+            if (currentViewsInGameGrid[i] instanceof ShapeEmpty) {
                 currentStateOfGameGrid[i] = 0;
                 numberOfEmptyFields++;
-            } else if (currentViewsInGameGrig[i].getClass().equals(botShape.getClass())) {
+            } else if (currentViewsInGameGrid[i].getClass().equals(botShape.getClass())) {
                 currentStateOfGameGrid[i] = 1;
             } else {
                 currentStateOfGameGrid[i] = -1;
             }
         }
 
-       if (numberOfEmptyFields == currentViewsInGameGrig.length)  {
-           return (int) (Math.random() * currentViewsInGameGrig.length);
+       if (numberOfEmptyFields == currentViewsInGameGrid.length)  {
+           return (int) (Math.random() * currentViewsInGameGrid.length);
        } else {
            return moveAlgorithm.move(currentStateOfGameGrid);
        }
