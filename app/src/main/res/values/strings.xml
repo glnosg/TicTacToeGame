@@ -28,9 +28,9 @@
     <string name="string_multiplayer_settings_name_p3">Player 3 name: </string>
     <string name="string_multiplayer_settings_name_p4">Player 4 name: </string>
 
-    <string name="string_multiplayer_settings_grid_size">Game mGrid size</string>
-    <string name="string_multiplayer_settings_num_of_cols">Number of columns: </string>
-    <string name="string_multiplayer_settings_num_of_rows">Number of rows: </string>
+    <string name="string_multiplayer_settings_grid_size">Game Grid size</string>
+    <string name="string_multiplayer_settings_num_of_cols">columns (max 20): </string>
+    <string name="string_multiplayer_settings_num_of_rows">rows (max 50): </string>
 
     <string name="string_multiplayer_settings_winning_cond">Winning condition</string>
     <string name="string_multiplayer_settings_how_many_in_row">How many in row to win: </string>

@@ -138,6 +138,9 @@ public class CustomMultiplayerSettingsActivity extends AppCompatActivity {
                     }
                 }
 
+                gridDimens[0] = (gridDimens[0] > 20) ? 20 : gridDimens[0];
+                gridDimens[1] = (gridDimens[1] > 50) ? 50 : gridDimens[1];
+
                 int winningCondition = DEFAULT_WINNING_CONDITION;
                 String enteredWinningCondition = winningConditionEditText.getText().toString();
 

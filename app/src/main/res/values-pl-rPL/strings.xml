@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GLN Kółko i Krzyżyk</string>
+    <string name="title_activity_multiplayer_menu">Menu Gry Wieloosobowej</string>
+    <string name="title_activity_multiplayer_standard">Ustawienia Gry Standardowej</string>
+    <string name="title_activity_multiplayer_custom">Ustawienia Gry Niestandardowej</string>
+    <string name="string_main_menu_single_player">Jeden Gracz</string>
+    <string name="string_main_menu_multiplayer">Wielu Graczy</string>
+    <string name="string_main_menu_exit_game">Opuść Grę</string>
+    <string name="string_single_player_menu_easy">Poziom Łatwy</string>
+    <string name="string_single_player_menu_medim">Poziom Średni</string>
+    <string name="string_single_player_menu_hard">Poziom Trudny</string>
+    <string name="string_multiplayer_menu_standard">Gra standardowa 1 na 1</string>
+    <string name="string_multiplayer_menu_custom">Gra niestandardowa</string>
+    <string name="string_multiplayer_settings_players_settings">Ustawienia Graczy</string>
+    <string name="string_multiplayer_settings_num_of_players">Liczba graczy:</string>
+    <string name="string_multiplayer_settings_name_p1">Nazwa gracza 1.:</string>
+    <string name="string_multiplayer_settings_name_p2">Nazwa gracza 2.:</string>
+    <string name="string_multiplayer_settings_name_p3">Nazwa gracza 3.:</string>
+    <string name="string_multiplayer_settings_name_p4">Nazwa gracza 4.:</string>
+    <string name="string_multiplayer_settings_grid_size">Rozmiar planszy:</string>
+    <string name="string_multiplayer_settings_num_of_cols">kolumny (maks. 20):</string>
+    <string name="string_multiplayer_settings_num_of_rows">wiersze (maks. 50):</string>
+    <string name="string_multiplayer_settings_winning_cond">Warunek wygranej</string>
+    <string name="string_multiplayer_settings_start_game">Rozpocznij grę</string>
+    <string name="string_multiplayer_settings_how_many_in_row">Liczba figur w linii:</string>
+    <string name="string_gameplay_games_played">Gry rozegrane:</string>
+    <string name="string_gameplay_next_game">Następna gra</string>
+    <string name="string_gameplay_draw">Remis!</string>
+    <string name="string_gameplay_won">wygrywa!</string>
+</resources>
