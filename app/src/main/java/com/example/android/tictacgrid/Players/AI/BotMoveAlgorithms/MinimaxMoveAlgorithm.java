@@ -20,10 +20,96 @@ public class MinimaxMoveAlgorithm implements MoveAlgorithm {
     private static final int INITIAL_VALUE_OF_ALPHA = (int) Float.NEGATIVE_INFINITY;
     private static final int INITIAL_VALUE_OF_BETA = (int) Float.POSITIVE_INFINITY;
 
+    private int performMinimaxCallsCounter;
+
     @Override
     public int move(int[] currentStateOfGameGrid) {
+        performMinimaxCallsCounter = 0;
 //        return botMove(currentStateOfGameGrid, 0, INITIAL_VALUE_OF_ALPHA, INITIAL_VALUE_OF_BETA);
         return performMinimax(currentStateOfGameGrid, 1, 0, INITIAL_VALUE_OF_ALPHA, INITIAL_VALUE_OF_BETA);
+    }
+
+    private int performMinimax(
+            int[] currentStateOfGameGrid, int currentPlayer, int depth, int alpha, int beta) {
+
+        performMinimaxCallsCounter++;
+
+        int a = alpha;
+        int b = beta;
+
+        int depthOfMinimax = depth;
+
+        ArrayList<Integer> listOfScores = new ArrayList();
+        ArrayList<Integer> listOfEmptyFields = new ArrayList<>();
+
+        for (int i = 0; i < currentStateOfGameGrid.length; ++i) {
+            if (currentStateOfGameGrid[i] == 0) {
+                listOfEmptyFields.add(i);
+                listOfScores.add(0);
+            }
+        }
+
+        for (int i = 0; i < listOfEmptyFields.size(); ++i) {
+
+            int checkedMoveIndex = listOfEmptyFields.get(i);
+
+            currentStateOfGameGrid[checkedMoveIndex] = currentPlayer;
+
+
+            if (checkIfWon(currentStateOfGameGrid, currentPlayer)) {
+                if (currentPlayer == 1) {
+                    listOfScores.add(i, (listOfScores.get(i) + 10) - depth);
+                } else if (currentPlayer == -1) {
+                    listOfScores.add(i, (listOfScores.get(i) - 10) + depth);
+                }
+            } else if (listOfEmptyFields.size() > 1 && depthOfMinimax <= MAX_DEPTH) {
+                listOfScores.add(
+                        i, ((listOfScores.get(i) + performMinimax(
+                                currentStateOfGameGrid,
+                                -currentPlayer,
+                                depthOfMinimax + 1,
+                                alpha,
+                                beta))));
+            } else {
+                listOfScores.add(i, (listOfScores.get(i) - 0));
+            }
+
+            currentStateOfGameGrid[checkedMoveIndex] = 0;
+        }
+
+        if (listOfScores.isEmpty()) {
+            Log.d("MinimaxMove", "Minimax (listOfScores.isEmpty() - return 0): " + performMinimaxCallsCounter);
+            return 0;
+        }
+
+        while (listOfScores.size() > listOfEmptyFields.size()) {
+            listOfScores.remove(listOfEmptyFields.size());
+        }
+
+        int highestScore = Collections.max(listOfScores);
+        int lowestScore = Collections.min(listOfScores);
+
+        if (currentPlayer == 1) {
+            if (depthOfMinimax > 0) {
+                Log.d("MinimaxMove", "Minimax (depthOfMinimax > 0 - return highestScore): " + performMinimaxCallsCounter);
+                return highestScore;
+            } else {
+
+                Log.e("HARD BOT", "Returned field: " + listOfEmptyFields.get(listOfScores.indexOf(highestScore)));
+                Log.e("HARD BOT", "Field's best score: " + highestScore);
+                Log.e("HARD BOT", "From list of scores: ");
+                for (int i = 0; i < listOfEmptyFields.size(); ++i) {
+                    Log.e("HARD BOT", "Field: " + listOfEmptyFields.get(i) + ", score: " + listOfScores.get(i));
+
+                }
+
+                Log.d("MinimaxMove", "Minimax (return listOfEmptyFields.get(listOfScores.indexOf(highestScore))): " + performMinimaxCallsCounter);
+                return listOfEmptyFields.get(listOfScores.indexOf(highestScore));
+            }
+        } else {
+            Log.d("MinimaxMove", "Minimax (return lowestScore): " + performMinimaxCallsCounter);
+            return lowestScore;
+        }
     }
 
     private int botMove(int[] stateOfGameGrid, int depth, int alpha, int beta) {
@@ -108,6 +194,7 @@ public class MinimaxMoveAlgorithm implements MoveAlgorithm {
     }
 
     private int playerMove(int[] stateOfGameGrid, int depth, int alpha, int beta) {
+
         int a = alpha;
         int b = beta;
 
@@ -169,94 +256,17 @@ public class MinimaxMoveAlgorithm implements MoveAlgorithm {
         return bestScore;
     }
 
-    private int performMinimax(
-            int[] currentStateOfGameGrid, int currentPlayer, int depth, int alpha, int beta) {
-
-        int a = alpha;
-        int b = beta;
-
-        int depthOfMinimax = depth;
-
-        ArrayList<Integer> listOfScores = new ArrayList();
-        ArrayList<Integer> listOfEmptyFields = new ArrayList<>();
-
-        for (int i = 0; i < currentStateOfGameGrid.length; ++i) {
-            if (currentStateOfGameGrid[i] == 0) {
-                listOfEmptyFields.add(i);
-                listOfScores.add(0);
-            }
-        }
-
-        for (int i = 0; i < listOfEmptyFields.size(); ++i) {
-
-            int checkedMoveIndex = listOfEmptyFields.get(i);
-
-            currentStateOfGameGrid[checkedMoveIndex] = currentPlayer;
-
-
-            if (checkIfWon(currentStateOfGameGrid, currentPlayer)) {
-                if (currentPlayer == 1) {
-                    listOfScores.add(i, (listOfScores.get(i) + 10) - depth);
-                } else if (currentPlayer == -1) {
-                    listOfScores.add(i, (listOfScores.get(i) - 10) + depth);
-                }
-            } else if (listOfEmptyFields.size() > 1 && depthOfMinimax <= MAX_DEPTH) {
-                listOfScores.add(
-                        i, ((listOfScores.get(i) + performMinimax(
-                                        currentStateOfGameGrid,
-                                        -currentPlayer,
-                                        depthOfMinimax + 1,
-                                        alpha,
-                                        beta))));
-            } else {
-                listOfScores.add(i, (listOfScores.get(i) - 0));
-            }
-
-            currentStateOfGameGrid[checkedMoveIndex] = 0;
-        }
-
-        if (listOfScores.isEmpty()) {
-            return 0;
-        }
-
-        while (listOfScores.size() > listOfEmptyFields.size()) {
-            listOfScores.remove(listOfEmptyFields.size());
-        }
-
-        int highestScore = Collections.max(listOfScores);
-        int lowestScore = Collections.min(listOfScores);
-
-        if (currentPlayer == 1) {
-            if (depthOfMinimax > 0) {
-                return highestScore;
-            } else {
-
-                Log.e("HARD BOT", "Returned field: " + listOfEmptyFields.get(listOfScores.indexOf(highestScore)));
-                Log.e("HARD BOT", "Field's best score: " + highestScore);
-                Log.e("HARD BOT", "From list of scores: ");
-                for (int i = 0; i < listOfEmptyFields.size(); ++i) {
-                    Log.e("HARD BOT", "Field: " + listOfEmptyFields.get(i) + ", score: " + listOfScores.get(i));
-
-                }
-
-                return listOfEmptyFields.get(listOfScores.indexOf(highestScore));
-            }
-        } else {
-            return lowestScore;
-        }
-    }
-
     private boolean checkIfWon(int[] stateToCheck, int player) {
 
         if(
                 (stateToCheck[0] == player && stateToCheck[1] == player && stateToCheck[2] == player) ||
-                (stateToCheck[3] == player && stateToCheck[4] == player && stateToCheck[5] == player) ||
-                (stateToCheck[6] == player && stateToCheck[7] == player && stateToCheck[8] == player) ||
-                (stateToCheck[0] == player && stateToCheck[3] == player && stateToCheck[6] == player) ||
-                (stateToCheck[1] == player && stateToCheck[4] == player && stateToCheck[7] == player) ||
-                (stateToCheck[2] == player && stateToCheck[5] == player && stateToCheck[8] == player) ||
-                (stateToCheck[0] == player && stateToCheck[4] == player && stateToCheck[8] == player) ||
-                (stateToCheck[2] == player && stateToCheck[4] == player && stateToCheck[6] == player)) {
+                        (stateToCheck[3] == player && stateToCheck[4] == player && stateToCheck[5] == player) ||
+                        (stateToCheck[6] == player && stateToCheck[7] == player && stateToCheck[8] == player) ||
+                        (stateToCheck[0] == player && stateToCheck[3] == player && stateToCheck[6] == player) ||
+                        (stateToCheck[1] == player && stateToCheck[4] == player && stateToCheck[7] == player) ||
+                        (stateToCheck[2] == player && stateToCheck[5] == player && stateToCheck[8] == player) ||
+                        (stateToCheck[0] == player && stateToCheck[4] == player && stateToCheck[8] == player) ||
+                        (stateToCheck[2] == player && stateToCheck[4] == player && stateToCheck[6] == player)) {
 
             return true;
         } else {

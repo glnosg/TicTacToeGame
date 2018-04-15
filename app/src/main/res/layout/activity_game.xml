@@ -124,33 +124,41 @@
 
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical|horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="12">
 
-        <FrameLayout
+        <ScrollView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:scrollbars="vertical|horizontal">
 
-            <GridLayout
-                android:id="@+id/gv_game_grid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@color/colorGameGridFrame" />
-
-            <Button
-                android:id="@+id/button_next_game"
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/string_gameplay_next_game"
-                android:textAllCaps="true"
-                android:visibility="gone"/>
+                android:layout_height="wrap_content">
 
-        </FrameLayout>
+                <GridLayout
+                    android:id="@+id/gv_game_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@color/colorGameGridFrame" />
 
-    </ScrollView>
+                <Button
+                    android:id="@+id/button_next_game"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/string_gameplay_next_game"
+                    android:textAllCaps="true"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
 
 </LinearLayout>
